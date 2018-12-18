@@ -25,9 +25,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_085845) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
-    t.string "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "types"
   end
 
   create_table "coaches", force: :cascade do |t|
@@ -50,9 +48,8 @@ ActiveRecord::Schema.define(version: 2018_12_19_085845) do
 
   create_table "districts", force: :cascade do |t|
     t.string "name"
+    t.string "types"
     t.bigint "city_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_districts_on_city_id"
   end
 
@@ -89,12 +86,16 @@ ActiveRecord::Schema.define(version: 2018_12_19_085845) do
 
   create_table "tickets", force: :cascade do |t|
     t.bigint "trip_id"
-    t.integer "customer_id"
-    t.boolean "status"
+    t.bigint "customer_id"
+    t.integer "status_buy"
+    t.integer "status_cancel"
+    t.integer "fare"
     t.string "bus_stop"
+    t.string "code"
     t.bigint "seat_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_tickets_on_customer_id"
     t.index ["seat_id"], name: "index_tickets_on_seat_id"
     t.index ["trip_id"], name: "index_tickets_on_trip_id"
   end
@@ -115,7 +116,6 @@ ActiveRecord::Schema.define(version: 2018_12_19_085845) do
     t.string "email"
     t.string "phone_number"
     t.boolean "admin"
-    t.string "password"
     t.bigint "garage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_085845) do
   add_foreign_key "coaches", "garages"
   add_foreign_key "stop_points", "bus_stations"
   add_foreign_key "stop_points", "trips"
+  add_foreign_key "tickets", "customers"
   add_foreign_key "tickets", "seats"
   add_foreign_key "tickets", "trips"
   add_foreign_key "trips", "coaches"

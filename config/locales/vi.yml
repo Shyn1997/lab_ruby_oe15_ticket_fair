@@ -33,3 +33,22 @@ vi:
         email: "Email"
         password: "Mật khẩu"
         password_confirmation: "Xác nhận"
+
+  tickets:
+    form_search_ticket:
+      phone_number: "Phone number"
+      ticket_code: "Ticket code"
+      check_ticket: "Check ticket"
+    form_search_all_ticket:
+      check_ticket: "Check ticket"
+    index:
+      please_check: "Please enter your search information"
+      ticket_information: "Ticket information"
+      not_phone_ticket: "phone number or ticket code is incorrect"
+      not_phone: "Phone number does not exist"
+    update:
+      cancel_fail: "Cancel fail"
+    cancel:
+      cancel_ticket: "Cancel ticket"
+    find_ticket:
+      error: "error"

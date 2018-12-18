@@ -33,3 +33,33 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "confirmation"
+  tickets:
+    form_search_ticket:
+      phone_number: "Phone number"
+      ticket_code: "Ticket code"
+      check_ticket: "Check ticket"
+    form_search_all_ticket:
+      check_ticket: "Check ticket"
+    index:
+      please_check: "Please enter your search information"
+      ticket_information: "Ticket information"
+      not_phone_ticket: "phone number or ticket code is incorrect"
+      not_phone: "Phone number does not exist"
+    update:
+      cancel_fail: "Cancel fail"
+    cancel:
+      cancel_ticket: "Cancel ticket"
+      you_sure: "Are you sure you want to cancel the ticket?"
+    find_ticket:
+      error: "error"
+    info_ticket:
+      name_garage: "Name garage"
+      license_plate: "License plate"
+      day_start: "Day start"
+      point_start: "Point start"
+      point_finish: "Point finish"
+      name: "Name"
+      phone_number: "Phone number"
+      email: "Email:"
+      ticket_price: "Ticket price"
+      status_cancel: "Status cancel"
