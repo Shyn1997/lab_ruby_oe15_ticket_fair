@@ -1,0 +1,4 @@
+<%= form_with model: @ticket, local: true, method: :patch,data: { confirm: t(".you_sure") } do |f| %>
+  <%= hidden_field_tag :status, "cancel" %>
+  <%= f.submit t(".cancel_ticket"), class: "btn form-control colorbg-red text-white" %>
+<% end %>

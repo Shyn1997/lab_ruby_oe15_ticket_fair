@@ -1,0 +1,31 @@
+<div class="search-item">
+  <div class="agency-info">
+    <div class="logo-agency">
+      <img src="<%= garage.image %>" alt="">
+    </div>
+    <div class="intro-agency">
+      <div class="ag-name"> <%= garage.name %> </div>
+    </div>
+    <div class="ratings-agency">
+      <div class="ag-ratings">
+        <span class="ratings-1">4.5/5</span>
+      </div>
+    </div>
+    <div class="xeca-agency">
+      <div class="xc-hotline">
+        <%= t (".hotline") %>
+        <span style="color: red"><%= garage.phone_number %></span>
+      </div>
+    </div>
+    <div class="bus-time-number">
+      <span><%= trips.search_trip_by_garage(garage.id).count %> <%= t ".trips" %></span>
+    </div>
+    <div class="displayBusTime">
+      <a class="show-bus-time" show="false" style><%= t ".view" %></a>
+    </div>
+  </div>
+  <%= render "trip", garage: garage, trips: trips.search_trip_by_garage(garage.id), customer: @customer %>
+</div>
+
+
+

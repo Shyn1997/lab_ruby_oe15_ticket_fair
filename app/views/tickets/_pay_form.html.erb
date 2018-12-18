@@ -1,0 +1,4 @@
+<%= form_with model: @ticket, local: true, method: :patch do |f| %> 
+  <%= hidden_field_tag :id, customer.id %>
+  <%= f.submit t(".pay_ticket"), class: "btn form-control colorbg-red text-white" %>
+<% end %>
