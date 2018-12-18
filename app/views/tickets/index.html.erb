@@ -1,0 +1,17 @@
+<div class = "container height-index-cancel">
+  <div class="left-search float-left">
+    <%= render "form_search" %>
+  </div>
+  <div class = "float-right col-sm-8 mt">
+    <% if @tickets.present? %>
+      <%= render "info_ticket" %>
+      <% if @tickets.status_activite?%>
+        <%= render "cancel" %>
+      <% else %>
+        <p class = "form-control colorbg-gray text-white text-center">Cancelled</p>
+      <% end %>
+    <% else %>
+      <p class = "p1-cancelticket text-center form-control "><%= t ".please_check" %></p>
+    <% end %>
+  </div>
+</div>

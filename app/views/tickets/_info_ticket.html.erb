@@ -1,0 +1,17 @@
+<h3 class = "font-weight-bold text-center "><%= t ".ticket_information" %></h3>
+<div class = "d-flex">
+  <ul class="list-group col-sm-6">
+    <li class="list-group-item"><b><%= t ".name_garare" %></b> <%= @tickets.trip.coach.garage.name %></li>
+    <li class="list-group-item"><b><%= t ".license_plate" %></b> <%= @tickets.trip.coach.license_plate %></li>
+    <li class="list-group-item"><b><%= t ".day_start" %></b> <%= @tickets.trip.time_start %></li>
+    <li class="list-group-item"><b><%= t ".point_start" %></b> <%= @tickets.trip.city_start %></li>
+    <li class="list-group-item"><b><%= t ".point_finish" %></b> <%= @tickets.trip.city_finish %></li>
+  </ul>
+  <ul class="list-group col-sm-6">
+    <li class="list-group-item"><b><%= t ".name" %></b> <%= @tickets.customer.name %></li>
+    <li class="list-group-item"><b><%= t ".Phone_number" %></b> <%= @tickets.customer.phone_number %></li>
+    <li class="list-group-item"><b><%= t ".email" %></b> <%= @tickets.customer.email %></li>
+    <li class="list-group-item"><b><%= t ".ticket_price" %></b> <%= @tickets.fare %></li>
+    <li class="list-group-item"><b><%= t ".status_cancel" %></b> <%= @tickets.status_cancel %></li>
+  </ul>
+</div>

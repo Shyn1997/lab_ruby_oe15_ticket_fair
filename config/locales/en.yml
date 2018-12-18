@@ -33,3 +33,26 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "confirmation"
+  tickets:
+    form_search:
+      phone_number: "Phone number"
+      ticket_code: "Ticket code"
+      check_ticket: "Check ticket"
+    index:
+      please_check: "Ticket code or phone number is not valid. Please try again"
+      ticket_information: "Ticket information"
+    cancel:
+      cancel_ticket: "Cancel ticket"
+    find_ticket:
+      error: "error"
+    info_ticket:
+      name_garage: "Name garage:"
+      license_plate: "License plate:"
+      day_start: "Day start:"
+      point_start: "Point start:"
+      point_finish: "Point finish:"
+      name: "Name:"
+      phone_number: "Phone number:"
+      email: "Email:"
+      ticket_price: "Ticket price:"
+      status_cancel: "Status cancel:"

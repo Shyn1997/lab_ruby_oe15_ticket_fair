@@ -17,10 +17,13 @@ body{
 	height: auto;
 }
 .colorbg-dark{
-	background-color: #000;
+  background-color: #000;
+}
+.colorbg-gray{
+  background-color: #c5c4c4;
 }
 .colorbg-red{
-	background-color: #e55042;
+  background-color: #e55042;
 }
 /*---------------------------------------------------------------Header--------------------*/
 .size-header{
@@ -163,11 +166,28 @@ body{
 .email-address{
 	width: 85%;
 	border: 1px;
-    background-color: #000!important;
+  background-color: #000!important;
 }
 .email{
-    width: 25px;
+  width: 25px;
 }
 .width-arc-footer{
 	min-width: 257px!important;
+}
+
+.left-search{
+	width: 25%;
+}
+
+.height-index-cancel{
+	min-height: 520px;
+}
+
+.mt{
+	margin-top: 50px;
+}
+.p1-cancelticket{
+	min-height: 50px;
+	color: #458265;
+	background-color: #dff0d8;
 }

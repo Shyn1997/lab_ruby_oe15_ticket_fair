@@ -1,0 +1,3 @@
+<%= form_with model: @tickets, local: true, method: :patch do |f| %>
+  <%= f.submit t(".cancel_ticket"), class: "btn form-control colorbg-red text-white" %>
+<% end %>
