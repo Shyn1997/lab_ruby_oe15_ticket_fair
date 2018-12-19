@@ -1,0 +1,60 @@
+<% trips.each do |trip| %>
+<div class="bus-time-list">
+  <div class="bus-time">
+    <div class="bus-time-content">
+      <div class="bt-col-1">
+        <div class="bt-date-time">
+            <span class="start-time"><%= trip.time_start.strftime("%H:%M") %></span>
+            <span class="end-time"><%= trip.time_finish.strftime("%H:%M") %></span>
+        </div>
+        <div class="total-time">
+          Thời gian: <%= (trip.time_finish - trip.time_start) / 1.hour %> giờ
+        </div>
+        <span class="ag-name"><%= garage.name %></span>
+      </div>
+      <div class="bt-col-2">
+        <div class="bt-route">
+          <span class="start-point"> <%= trip.city_start %></span>
+          <span class="end-point"><%= trip.city_finish %></span>
+        </div>
+        <div class="route-intro">
+          (Cung đường: Đang cập nhật ...)
+        </div>
+        <span class="boarding-point"><%= t ".stop_point" %></span>
+      </div>
+      <div class="bt-col-3">
+        <div class="bt-info">
+          <span class="total-seat"> <%= trip.coach.seat_amount %> &nbsp;<%= t ".seat_online" %> </span>
+        </div>
+        <div class="bus-item-info">
+        (<%= trip.coach.types %>)
+        </div>
+        <span class="rule-ag"> Chính sách hủy vé </span>
+      </div>
+      <div class="bt-col-4 content_price">
+        <div class="bt-price"><%= number_to_currency(trip.fare, precision: 0, locale: :vi) %></div>
+      </div>
+      <div class="bt-col-5">
+        <% if trip.time_start < Time.now %>
+          <a class="show-booking button-disable" show="false" href="javascript:void(0);" onlinestatus="1"><%= t ".time_out" %></a>
+        <% elsif trip.time_start > Time.now  %>
+          <a class="show-booking button-show" show="true" href="javascript:void(0);" onlinestatus="1"><%= t ".choose_seat" %></a>
+        <% end %>
+      </div>
+    </div>
+    <%= render "stop_point", stop_points: trip.stop_points, trip: trip if trip.time_start > Time.now %>
+    <!-- Chọn ghế -->
+    <div class="bookingbroading">
+      <div class="bus-time-booking busTime_5249">
+        <div class="bus-time-category">
+          <div class="book-view">
+            <%= render "seat_forms/seat_form", trip: trip, coach: trip.coach, seats: trip.coach.seats %>
+          </div>
+          <%= render "note" %>
+        </div>
+        <%= render "booking", trip: trip, customer: customer %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

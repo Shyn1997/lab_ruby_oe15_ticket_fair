@@ -1,10 +1,10 @@
 <section class="size-section-2 bg-section2 d-flex align-items-center">
-  <form class="mx-auto d-flex form-ahihi" action="#" method="GET">
-    <input type="text" name="startPoint" class="form-control" id="startPoint" placeholder=<%= t".point_start" %>>
-    <input type="text" name="startPoint" class="form-control" id="startPoint" placeholder=<%= t".point_stop" %>>
-    <input class="form-control" type="date" name="bday">
-    <input type="submit" class="size-seach btn bg-danger font-weight-bold text-white" value=<%= t".search" %>>
-  </form>
+  <%= form_with url: garages_path, local: true, method: :get, html: {class: "mx-auto d-flex form-ahihi"} do |form| %>
+    <%= form.text_field :city_start, class: "form-control startPoint required", placeholder: t(".point_start"), required: :true %>
+    <%= form.text_field :city_end, class: "form-control startPoint required", placeholder: t(".point_stop"), required: :true %>
+    <%= form.text_field :time_start, class: "form-control date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+    <%= form.submit t(".search"), class: "size-seach btn bg-danger font-weight-bold text-white" %>
+  <% end %>
 </section>
 <section class="section-3">
   <div class="container d-flex justify-content-between">

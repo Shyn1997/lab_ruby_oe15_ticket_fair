@@ -1,0 +1,29 @@
+<div id="dvSearchTicket" class="ticket-search-filter">
+  <div class="container desktop-route-search hidden-xs hidden-sm">
+    <%= form_with url: garages_path, local: true, method: :get, html: {class: "form-inline"} do |form| %>
+      <div class="form-group">
+        <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+        <%= form.text_field :city_start, class: "location-search startPoint", value: params[:city_start] %>
+      </div>
+      <div class="form-group hidden-xs">
+        <a href="#" class="switchButton">⇌</a>
+      </div>
+      <div class="form-group">
+        <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+        <%= form.text_field :city_end, class: "location-search startPoint", value: params[:city_end] %>
+      </div>
+      <div class="form-group departDate-fg">
+        <%= form.text_field :time_start, class: "form-control date date-picker datePicker readonly", value: params[:time_start], "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: true, onkeypress: "return false;" %>
+        <div class="form-group quick-date-select fr hidden-xs hidden-sm">
+          <button id="btToday" type="button" class="fl btn btn-gray btn-today">Hôm nay</button>
+          <button id="btTomorrow" type="button" class="fl btn btn-gray btn-tomorrow">
+            Ngày mai
+          </button>
+        </div>
+      </div>
+      <div class="form-group pull-right">
+        <%= form.submit "Tìm vé xe", class: "submit-btn btn  search-btn", id: "searchSubmit" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,4 +1,4 @@
 class Seat < ApplicationRecord
   belongs_to :coach
-  belongs_to :ticket
+  has_many :tickets
 end

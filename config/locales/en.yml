@@ -10,9 +10,10 @@ en:
       trusted_cars: "TRUSTED CARS"
       only: "100% ONLY"
       attractive_tourist_routes: "Attractive tourist routes"
-      search: "Seach_ticket"
-      point_start: "Point_start"
-      point_stop: "Point_stop"
+      search: "Seach ticket"
+      point_start: "Point start"
+      point_stop: "Point stop"
+      date_start: "Date start"
 
   layouts:
     header:
@@ -33,3 +34,44 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "confirmation"
+
+  garages:
+    index:
+      from: "Vé xe từ"
+      to: "đến"
+      ticket: "Vé xe khách"
+      coach: "xe đi"
+    garage:
+      hotline: "Tổng đài đặt vé online:"
+      view: "Xem chuyến xe"
+    trip:
+      trips: "Chuyến"
+      update: "(Cung đường: Đang cập nhật ...)"
+      stop_point: "Điểm đón trả khách"
+      seat_online: "chỗ online"
+      time_out: "Hết giờ"
+      choose_seat: "Chọn chỗ"
+    booking:
+      date: "Ngày"
+      garage: "Nhà xe"
+      seat_selected: "Ghế đã chọn"
+      total_amount: "Tổng tiền"
+      phone_number: "Số điện thoại"
+      full_name: "Họ tên"
+      email: "Email"
+      start_point: "Điểm đón"
+      choose_start_point: "Chọn điểm đón"
+    stop_point:
+      start_point: "ĐIỂM ĐÓN"
+      end_point: "ĐIỂM TRẢ"
+    seat_floor:
+      floor : "TẦNG"
+    note:
+      empty_seat: "Ghế trống"
+      choosing: "Đang chọn"
+      picked: "Đã chọn"
+      note: "Lưu ý:"
+      seat_note: "Chỗ ngồi của quý khách sẽ được nhà xe sắp xếp khi quý khách ra xe."
+      time_note: "Bạn cần đến trước 30 phút để sắp xếp hành lý."
+      info_note: "Để biết thêm thông tin chi tiết vui lòng liên hệ tổng đài"
+      hotline: "CSKH:"
