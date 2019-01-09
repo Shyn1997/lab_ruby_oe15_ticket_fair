@@ -9,6 +9,10 @@ class GaragesController < ApplicationController
     @customer = Customer.new
     @customer.tickets.new
     store_location
+
+    return if @garages
+    flash.now["success"] = "Không tìm thấy chuyến xe"
+    render "index"
   end
 
   private

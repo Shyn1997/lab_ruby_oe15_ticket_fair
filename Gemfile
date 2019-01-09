@@ -3,6 +3,8 @@ git_source(:github){|repo| "https://github.com/#{repo}.git"}
 
 ruby "2.5.3"
 
+gem "faker"
+gem "figaro"
 gem "bcrypt", "3.1.12"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "bootstrap"
@@ -30,6 +32,10 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   gem "web-console", ">= 3.3.0"
+end
+
+group :production do
+  gem "rails_12factor"
 end
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]

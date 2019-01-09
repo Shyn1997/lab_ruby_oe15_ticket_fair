@@ -20,8 +20,33 @@ $(document).ready(function() {
   $('#defaultOpen').click();
 });
 
+$(document).ready(function() {
+  $("#tg-buton1").hide();
+  $("#tg-buton2").hide();
+});
+
 $(document).ready(function(){
-  $(".startPoint").keyup(function(){
+  $("#buton1").click(function(){
+    $("#tg-buton1").toggle();
+  });
+});
+
+$(document).ready(function(){
+  $("#buton2").click(function(){
+    $("#tg-buton2").toggle();
+  });
+});
+
+$(document).ready(function() {
+  $(".readonly").on('keydown paste', function(e){
+    e.preventDefault();
+  });
+
+  $('#defaultOpen').click();
+});
+
+$(document).ready(function(){
+  $(".startPoint").change(function(){
     $.ajax({
       url: '/static_pages',
       method: 'get',

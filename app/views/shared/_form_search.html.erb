@@ -6,7 +6,7 @@
         <%= form.text_field :city_start, class: "location-search startPoint", value: params[:city_start] %>
       </div>
       <div class="form-group hidden-xs">
-        <a href="#" class="switchButton">⇌</a>
+        <p href="#" class="switchButton">⇌</p>
       </div>
       <div class="form-group">
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
@@ -15,10 +15,6 @@
       <div class="form-group departDate-fg">
         <%= form.text_field :time_start, class: "form-control date date-picker datePicker readonly", value: params[:time_start], "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: true, onkeypress: "return false;" %>
         <div class="form-group quick-date-select fr hidden-xs hidden-sm">
-          <button id="btToday" type="button" class="fl btn btn-gray btn-today">Hôm nay</button>
-          <button id="btTomorrow" type="button" class="fl btn btn-gray btn-tomorrow">
-            Ngày mai
-          </button>
         </div>
       </div>
       <div class="form-group pull-right">
