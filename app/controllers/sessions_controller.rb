@@ -6,11 +6,11 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(params[:session][:password])
       log_in user
-      flash.now[:success] = t ".success"
+      flash[:success] = t ".success"
     else
-      flash.now[:danger] = t ".invalid"
-      redirect_to root_url
+      flash[:danger] = t ".invalid"
     end
+    redirect_to root_url
   end
 
   def destroy

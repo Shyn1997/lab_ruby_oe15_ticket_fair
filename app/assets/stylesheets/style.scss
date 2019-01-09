@@ -1,1 +1,7 @@
-@import "bootstrap";
+@import 'bootstrap';
+@import 'global/css/components';
+@import 'layouts/layout/css/custom';
+@import 'global/plugins/bootstrap-fileinput/bootstrap-fileinput';
+@import 'global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3';
+@import 'global/plugins/bootstrap-timepicker/css/bootstrap-timepicker';
+@import 'global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker';

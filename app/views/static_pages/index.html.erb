@@ -1,45 +1,134 @@
 <section class="size-section-2 bg-section2 d-flex align-items-center">
-  <form class="mx-auto d-flex form-ahihi" action="#" method="GET">
-    <input type="text" name="startPoint" class="form-control" id="startPoint" placeholder=<%= t".point_start" %>>
-    <input type="text" name="startPoint" class="form-control" id="startPoint" placeholder=<%= t".point_stop" %>>
-    <input class="form-control" type="date" name="bday">
-    <input type="submit" class="size-seach btn bg-danger font-weight-bold text-white" value=<%= t".search" %>>
-  </form>
+  <%= form_with url: garages_path, local: true, method: :get, html: {class: "mx-auto d-flex form-ahihi"} do |form| %>
+    <%= form.text_field :city_start, class: "form-control startPoint required", placeholder: t(".point_start"), required: :true %>
+    <%= form.text_field :city_end, class: "form-control startPoint required", placeholder: t(".point_stop"), required: :true %>
+    <%= form.text_field :time_start, class: "form-control date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+    <%= form.submit t(".search"), class: "size-seach btn bg-danger font-weight-bold text-white" %>
+  <% end %>
 </section>
 <section class="section-3">
   <div class="container d-flex justify-content-between">
     <arcticle class = "arc-w-h mt-5">
-      <%= image_tag "cartk", class: "mt-5 ml-img-2"%>
+      <%= image_tag "cartk.png", class: "mt-5 ml-img-2"%>
       <h4 class="text-center font-weight-bold mt-3" ><%= t ".ticket_price" %></h4>
     </arcticle>
     <arcticle class = "arc-w-h mt-5">
-      <%= image_tag "seatck", class: "mt-5 ml-img-1"%>
+      <%= image_tag "seatck.png", class: "mt-5 ml-img-1"%>
       <h4 class="text-center font-weight-bold mt-3" ><%= t ".trusted_cars" %></h4>
     </arcticle>
     <arcticle class = "arc-w-h mt-5">
-      <%= image_tag "bussp", class: "mt-5 ml-img-1"%>
+      <%= image_tag "bussp.png", class: "mt-5 ml-img-1"%>
       <h4 class="text-center font-weight-bold mt-3"><%= t ".only" %></h4>
     </arcticle>
   </div>
 </section>
 <section class="section-4 container">
   <h1 class="font-weight-bold mt-5 text-center"><%= t ".attractive_tourist_routes" %></h1>
-  <div class="mt-5">
-    <button class="tablink" onclick="openPage('Home', this, 'orange')">Đà Lạt</button>
-    <button class="tablink" onclick="openPage('News', this, 'orange')" id="defaultOpen">Sa Pa</button>
-    <button class="tablink" onclick="openPage('Contact', this, 'orange')">Hà Giang</button>
-    <button class="tablink" onclick="openPage('About', this, 'orange')">Hội An</button>
-    <div id="Home" class="tabcontent">
-    1
-    </div>
-    <div id="News" class="tabcontent">
-    2
-    </div>
-    <div id="Contact" class="tabcontent">
-    3
-    </div>
-    <div id="About" class="tabcontent">
-    4
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 mt-3">
+        <nav>
+          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Hà Nội</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Đà Nẵng</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Sapa</a>
+            <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Hội An</a>
+          </div>
+        </nav>
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+          <div class="tab-pane fade show active tabcontent list-group" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="list-group-item d-flex justify-content-around">
+              <h4 class = "mt-1 with-txt-tourist">Hà Nội --> Sài Gòn </h4>
+              <h4 class = "mt-1">250,000 đ/vé </h4>
+              <%= form_with url: garages_path, local: true, method: :get do |form| %>
+                <%= hidden_field_tag :city_start, "Hà Nội", required: :true %>
+                <%= hidden_field_tag :city_end, "Sài Gòn", required: :true %>
+                <%= form.text_field :time_start, class: "date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+                <%= form.submit t(".search"), class: "size-seach bg-danger font-weight-bold text-white" %>
+              <% end %>
+            </div>
+            <div class="list-group-item d-flex justify-content-around">
+              <h4 class = "mt-1 with-txt-tourist">Hà Nội --> Sapa </h4>
+              <h4 class = "mt-1">300,000 đ/vé </h4>
+              <%= form_with url: garages_path, local: true, method: :get do |form| %>
+                <%= hidden_field_tag :city_start, "Hà Nội", required: :true %>
+                <%= hidden_field_tag :city_end, "Sapa", required: :true %>
+                <%= form.text_field :time_start, class: "date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+                <%= form.submit t(".search"), class: "size-seach bg-danger font-weight-bold text-white" %>
+              <% end %>
+            </div>
+            <div class="list-group-item d-flex justify-content-around">
+              <h4 class = "mt-1 with-txt-tourist">Hà Nội --> Đà Nẵng </h4>
+              <h4 class = "mt-1">200,000 đ/vé </h4>
+              <%= form_with url: garages_path, local: true, method: :get do |form| %>
+                <%= hidden_field_tag :city_start, "Hà Nội", required: :true %>
+                <%= hidden_field_tag :city_end, "Đà Nẵng", required: :true %>
+                <%= form.text_field :time_start, class: "date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+                <%= form.submit t(".search"), class: "size-seach bg-danger font-weight-bold text-white" %>
+              <% end %>
+            </div>
+            <div class="list-group-item d-flex justify-content-around">
+              <h4 class = "mt-1 with-txt-tourist">Hà Nội --> Hội An </h4>
+              <h4 class = "mt-1">250,000 đ/vé </h4>
+              <%= form_with url: garages_path, local: true, method: :get do |form| %>
+                <%= hidden_field_tag :city_start, "Hà Nội", required: :true %>
+                <%= hidden_field_tag :city_end, "Hội An", required: :true %>
+                <%= form.text_field :time_start, class: "date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+                <%= form.submit t(".search"), class: "size-seach bg-danger font-weight-bold text-white" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="tab-pane fade list-group" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+           <div class="list-group-item d-flex justify-content-around">
+              <h4 class = "mt-1 with-txt-tourist">Đà Nẵng --> Sài Gòn </h4>
+              <h4 class = "mt-1">550,000 đ/vé </h4>
+              <%= form_with url: garages_path, local: true, method: :get do |form| %>
+                <%= hidden_field_tag :city_start, "Đà Nẵng ", required: :true %>
+                <%= hidden_field_tag :city_end, "Sài Gòn", required: :true %>
+                <%= form.text_field :time_start, class: "date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+                <%= form.submit t(".search"), class: "size-seach bg-danger font-weight-bold text-white" %>
+              <% end %>
+            </div>
+            <div class="list-group-item d-flex justify-content-around">
+              <h4 class = "mt-1 with-txt-tourist">Đà Nẵng --> Hà Nội </h4>
+              <h4 class = "mt-1">700,000 đ/vé </h4>
+              <%= form_with url: garages_path, local: true, method: :get do |form| %>
+                <%= hidden_field_tag :city_start, "Đà Nẵng ", required: :true %>
+                <%= hidden_field_tag :city_end, "Hà Nội", required: :true %>
+                <%= form.text_field :time_start, class: "date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+                <%= form.submit t(".search"), class: "size-seach bg-danger font-weight-bold text-white" %>
+              <% end %>
+            </div>
+            <div class="list-group-item d-flex justify-content-around">
+              <h4 class = "mt-1 with-txt-tourist">Đà Nẵng --> Sapa </h4>
+              <h4 class = "mt-1">300,000 đ/vé </h4>
+              <%= form_with url: garages_path, local: true, method: :get do |form| %>
+                <%= hidden_field_tag :city_start, "Đà Nẵng ", required: :true %>
+                <%= hidden_field_tag :city_end, "Sapa", required: :true %>
+                <%= form.text_field :time_start, class: "date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+                <%= form.submit t(".search"), class: "size-seach bg-danger font-weight-bold text-white" %>
+              <% end %>
+            </div>
+            <div class="list-group-item d-flex justify-content-around">
+              <h4 class = "mt-1 with-txt-tourist">Đà Nẵng --> Hội An </h4>
+              <h4 class = "mt-1">250,000 đ/vé </h4>
+              <%= form_with url: garages_path, local: true, method: :get do |form| %>
+                <%= hidden_field_tag :city_start, "Đà Nẵng ", required: :true %>
+                <%= hidden_field_tag :city_end, "Hội An", required: :true %>
+                <%= form.text_field :time_start, class: "date date-picker datePicker readonly", placeholder: t(".date_start"), "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: :true %>
+                <%= form.submit t(".search"), class: "size-seach bg-danger font-weight-bold text-white" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            3
+          </div>
+          <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+            4
+          </div>
+        </div>
+      
+      </div>
     </div>
   </div>
 </section>
