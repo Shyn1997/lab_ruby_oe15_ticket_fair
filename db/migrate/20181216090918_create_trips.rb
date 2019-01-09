@@ -7,7 +7,8 @@ class CreateTrips < ActiveRecord::Migration[5.2]
       t.string :city_finish
       t.references :coach, foreign_key: true
       t.boolean :is_repeated
-      
+      t.float :fare
+
       t.timestamps
     end
   end

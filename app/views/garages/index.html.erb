@@ -1,0 +1,30 @@
+<header id="header">
+  <div class="container">
+    <div class="col-md-12 col-sm-12 col-xs-12 mt10 date-container ">
+      <div class="row header-row">
+        <div class="col-md-6 hidden-sm hidden-xs">
+          <h1 class="title-text-route">
+            <span class="hidden-xs hidden-sm"><%= t ".from" %></span> <%= params[:city_start] %> <%= t ".to" %> <%= params[:city_end] %>
+          </h1>
+          </div>
+          <div class="col-md-6 hidden-sm hidden-xs">
+            <h6 class="mt0 route-title hidden-sm hidden-xs route-title-bus-ticket" style="margin-top:5px !important;">
+              <span class="mt0 mb0 text-gray">
+                <%= link_to t(".ticket"), root_path %> &gt;
+                <%= link_to "#" do %> <%= t ".coach" %> <%= params[:city_end] %> từ <%= params[:city_start] %>
+                <% end %>
+              </span>
+            </h6>
+          </div>
+      </div>
+    </div>
+  </div>
+</header>
+<%= render "shared/form_search" %>
+<section class="search_section">
+  <div class="container">
+    <div class="search-content">
+      <%= render @garages, garages: @garages, trips: @trips %>
+    </div>
+  </div>
+</section>

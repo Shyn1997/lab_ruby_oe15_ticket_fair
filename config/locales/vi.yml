@@ -1,18 +1,30 @@
 vi:
+  customers:
+    create:
+      full_information: "Điền đầy đủ thông tin"
   sessions:
     create:
-      invalid:  "Email / mật khẩu không hợp lệ"
+      invalid: "Kết hợp email / mật khẩu không hợp lệ"
       success: "Thành công"
+
+  mail:
+    confirm: "Xác nhận đã đặt vé cho quý khách"
+    guide_all_1: "30 phút sau khi thanh toán quý khách vẫn chưa nhận được tin nhắn và email, vui lòng liên hệ với NhaXe qua Hotline: 1900 7075 (miền Bắc) hoặc 
+    1900 969681 - 1900 7070 (miền Nam)."
+    guide_all_2: "Hướng dẫn thanh toán"
+    guide_all_3: "1. Quý khách vui lòng đem mã đặt chỗ đến phòng vé của nhà xe để thanh toán tối đa 2 tiếng kể từ khi đặt vé. Sau thời gian này vé chưa thanh toán sẽ tự động bị hủy."
+    code_seat: "Các mã đặt chỗ vừa đăng ký:"
 
   static_pages:
     index:
-      ticket_price: "GIÁ VÉ RẺ NHẤT"
-      trusted_cars: "HÃNG XE UY TÍN"
-      only: "GIỮ CHỖ 100%"
+      ticket_price: "GIÁ VÉ"
+      trusted_cars: "XE Ô TÔ"
+      only: "100% ONLY"
       attractive_tourist_routes: "Các tuyến đường du lịch hấp dẫn"
-      search: "Tìm_vé"
-      point_start: "Điểm_đi"
-      point_stop: "Điểm_đến"
+      search: "TÌM VÉ"
+      point_start: "Điểm đi (tỉnh - thành phố)"
+      point_stop: "Điểm dừng (tỉnh - thành phố)"
+      date_start: "Ngày đi"
 
   layouts:
     header:
@@ -27,9 +39,124 @@ vi:
       log_out: "Đăng xuất"
 
   activerecord:
-    attributes:
-      user:
+    models:
+      users:
         name: "Tên"
         email: "Email"
         password: "Mật khẩu"
-        password_confirmation: "Xác nhận"
+        password_confirmation: "xác nhận"
+  
+  tickets:
+    form_search_ticket:
+      phone_number: "Số điện thoại"
+      ticket_code: "Mã vé"
+      check_ticket: "Kiểm tra vé"
+    form_search_all_ticket:
+      check_ticket: "Kiểm tra vé"
+      phone_number: "Số điện thoại"
+    index:
+      please_check: "Vui lòng nhập thông tin tìm kiếm của bạn"
+      ticket_information: "Thông tin vé"
+      not_phone_ticket: "Số điện thoại hoặc mã vé không chính xác"
+      not_phone:  "Số điện thoại không tồn tại"
+    update:
+      cancel_fail: "Hủy thất bại"
+    cancel:
+      cancel_ticket: "Hủy vé"
+      you_sure: "Bạn có chắc chắn muốn hủy vé không?"
+    find_ticket:
+      error: "lỗi"
+    ticket:
+      ticket_information: "Thông tin vé"
+      name_garare: "Tên nhà xe"
+      license_plate: "Biển số xe"
+      day_start: "Ngày bắt đầu"
+      point_start: "Điểm bắt đầu"
+      point_finish:  "Điểm kết thúc"
+      name: "Tên"
+      phone_number: "Số điện thoại"
+      email: "Email:"
+      ticket_price:  "Giá vé"
+      status_cancel: "Trạng thái"
+      seat: "Ghế số"
+      code: "Mã vé"
+    pay_ticket:
+      ticket_information: "Thông tin vé"
+      name_garare: "Tên nhà xe"
+      license_plate: "Biển số xe"
+      day_start: "Ngày bắt đầu"
+      point_start: "Điểm bắt đầu"
+      point_finish:  "Điểm kết thúc"
+      name: "Tên"
+      phone_number: "Số điện thoại"
+      email: "Email:"
+      ticket_price:  "Giá vé"
+      status_cancel: "Trạng thái"
+      seat: "Ghế số"
+      code: "Mã vé"
+    pay:
+      pay_store: "Thanh toán tại các cửa hàng tiện lợi"
+      guide_pay_store: "1. Vui lòng thanh toán tại bất kỳ cửa hàng tiện lợi dưới đây hoặc Viettel Post gần bạn tối đa sau 2 giờ kể từ khi đăng ký. Sau thời gian này, hệ thống sẽ hủy đặt vé của bạn."
+      agree: "Tôi đồng ý với quy chế của nhà xe"
+      pay_card: "Thanh toán qua thẻ ATM trực tuyến"
+      guide_1: "Thẻ của bạn phải có đăng ký dịch vụ thanh toán trực tuyến với ngân hàng."
+      guide_2: "1. Chọn ngân hàng trên thẻ của bạn."
+      bank_1: "Ngân Hàng Agribank"
+      bank_2: "Ngân Hàng Viettinbank"
+      bank_3: "Ngân Hàng TienPhongbank"
+      bank_4: "Ngân Hàng ACB"
+      bank_5: "Ngân Hàng BIDV"
+      bank_6: "Ngân Hàng SHB"
+      guide_3: "2. Bạn sẽ được chuyển hướng về cổng thanh toán để hoàn tất thanh toán. Cổng thanh toán hiện đã hỗ trợ thanh toán qua 25 ngân hàng tại Việt Nam."
+      agree: "Tôi đồng ý với quy chế của nhà xe"
+    pay_form:
+      pay_ticket: "Thanh toán"
+    after_pay: 
+      confirm: "Xác nhận đã đặt vé cho quý khách"
+      guide_all_1: "30 phút sau khi thanh toán quý khách vẫn chưa nhận được tin nhắn và email, vui lòng liên hệ với NhaXe qua Hotline: 1900 7075 (miền Bắc) hoặc 
+    1900 969681 - 1900 7070 (miền Nam)."
+      guide_all_2: "Hướng dẫn thanh toán"
+      guide_all_3: "1. Quý khách vui lòng đem mã đặt chỗ đến phòng vé của nhà xe để thanh toán tối đa 2 tiếng kể từ khi đặt vé. Sau thời gian này vé chưa thanh toán sẽ tự động bị hủy."
+      code_seat: "Các mã đặt chỗ vừa đăng ký:"
+
+
+  garages:
+    index:
+      from: "Vé xe từ"
+      to: "đến"
+      ticket: "Vé xe khách"
+      coach: "xe đi"
+    garage:
+      hotline: "Tổng đài đặt vé online:"
+      view: "Xem chuyến xe"
+    trip:
+      trips: "Chuyến"
+      update: "(Cung đường: Đang cập nhật ...)"
+      stop_point: "Điểm đón trả khách"
+      seat_online: "chỗ online"
+      time_out: "Hết giờ"
+      choose_seat: "Chọn chỗ"
+    booking:
+      date: "Ngày"
+      garage: "Nhà xe"
+      seat_selected: "Ghế đã chọn"
+      total_amount: "Tổng tiền"
+      phone_number: "Số điện thoại"
+      full_name: "Họ tên"
+      email: "Email"
+      start_point: "Điểm đón"
+      choose_start_point: "Chọn điểm đón"
+    stop_point:
+      start_point: "ĐIỂM ĐÓN"
+      end_point: "ĐIỂM TRẢ"
+    seat_floor:
+      floor : "TẦNG"
+    note:
+      empty_seat: "Ghế trống"
+      choosing: "Đang chọn"
+      picked: "Đã chọn"
+      note: "Lưu ý:"
+      seat_note: "Chỗ ngồi của quý khách sẽ được nhà xe sắp xếp khi quý khách ra xe."
+      time_note: "Bạn cần đến trước 30 phút để sắp xếp hành lý."
+      info_note: "Để biết thêm thông tin chi tiết vui lòng liên hệ tổng đài"
+      hotline: "CSKH:"

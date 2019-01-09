@@ -8,8 +8,12 @@
       <% else %>
         <%= link_to t(".log_in"), "", data: { toggle: "modal", target: "#exampleModalCenter" }%>
       <% end %>
-      <%= link_to "", url_for(locale: :vi), class: "img-vi size-img-i18n ml-2 mr-1"%>
-      <%= link_to "", url_for(locale: :en), class: "img-en size-img-i18n"%>
+      <%= link_to url_for(locale: :vi) do %>
+        <%= image_tag "vi.png"%>
+      <% end %>
+      <%= link_to url_for(locale: :en) do %>
+        <%= image_tag "en.png"%>
+      <% end %>
     </div>
   </div>
 </header>
@@ -34,12 +38,14 @@
 <section class="size-section-1 colorbg-red text-white">
   <div class="container size-section-1 d-flex">
     <div class="d-flex justify-content-start with-50">
-      <%= link_to "", root_url, class: "img-car"%>
-      <%= link_to t(".buy_ticket"), "#", class: "txt-section-1 text-white font-weight-bold ml-5"%>
+      <%= link_to root_url do %>
+        <%= image_tag "car.png", class: "img-car"%>
+      <% end %>
+      <%= link_to t(".buy_ticket"), root_url, class: "txt-section-1 text-white font-weight-bold ml-5"%>
     </div>
     <div class="d-flex justify-content-end with-50">
-    <%= link_to t(".find_ticket"), "#", class: "txt-section-1 text-white font-weight-bold ml-4"%>
-    <%= link_to t(".ticket_cance"), "#", class: "txt-section-1 text-white font-weight-bold ml-4"%>
+    <%= link_to t(".find_ticket"), tickets_path(search: "search"), class: "txt-section-1 text-white font-weight-bold ml-4"%>
+    <%= link_to t(".ticket_cance"), tickets_path(search: "cancel"), class: "txt-section-1 text-white font-weight-bold ml-4"%>
     <%= link_to t(".garage"), "#", class: "txt-section-1 text-white font-weight-bold ml-4"%>
     </div>
     <div></div>

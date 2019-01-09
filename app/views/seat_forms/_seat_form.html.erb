@@ -1,0 +1,42 @@
+<% if coach.seat_form == 2 %>
+  <div class="seatWrap">
+    <div class="seats">
+      <p class="lower-new">
+        <span class="txt-l">TẦNG 2</span>
+      </p>
+      <ul>
+        <% seats.where(types: 2).each do |seat| %>
+        <% status = if seat.ticket.nil? || seat.ticket.status == "cancel"
+                      "available"
+                    else "unavailable"
+                    end
+        %>
+          <li class="seat sleeper <%= status %> "  data="<%= seat.code %>" type="1">
+            <a class="seatpick-<%= status %>" data-status="<%= status %>" data-trip="<%= trip.id %>" data-bus-station=" " data-fare="<%= trip.fare %>" data-code="<%= seat.code %>" data-id="<%= seat.id %>"><span class="seatNo"><%= seat.code %></span></a>
+          </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+<div class="seatWrap">
+  <div class="seats">
+    <p class="lower-new">
+      <span class="txt-l">TẦNG 1</span>
+    </p>
+    <p class="lower-driver"><span class="icon2 txt-2"></span></p>
+    <ul>
+      <% seats.where(types: 1).each do |seat| %>
+        <% status = if seat.ticket.nil? || seat.ticket.status == "cancel"
+                      "available"
+                    else "unavailable"
+                    end
+        %>
+        <li class="seat sleeper <%= status %> "  data="<%= seat.code %>" type="1">
+            <a class="seatpick-<%= status %>" data-status="<%= status %>" data-trip="<%= trip.id %>" data-bus-station=" " data-fare="<%= trip.fare %>" data-code="<%= seat.code %>" data-id="<%= seat.id %>"><span class="seatNo"><%= seat.code %></span></a>
+          </li>
+      <% end %>
+    </ul>
+    </ul>
+  </div>
+</div>

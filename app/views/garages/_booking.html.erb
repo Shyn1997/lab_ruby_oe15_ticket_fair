@@ -1,0 +1,101 @@
+<%= form_for customer do |f| %>
+<div class="frm-booking">
+  <table width="100%">
+    <tbody>
+      <tr>
+        <td colspan="2">
+          <div class="fromTo">
+            <span class="from"><%= trip.city_start %></span>
+            <span class="to"><%= trip.city_finish %></span>
+            <span class="date"><%= t ".date" %> <%= trip.time_start.strftime('%d/%m/%Y') %></span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="tdLeft" width="88px"><%= t ".garage" %></td>
+        <td class="tdRight">
+          <span class="carName"> <%= trip.coach.garage.name %> </span></td>
+      </tr>
+      <tr>
+        <td width="100px" class="tdLeft"><%= t ".seat_selected" %></td>
+        <td class="tdRight"><span class="selectedSeat"></span>
+        </td>
+      </tr>
+      <tr>
+        <td class="tdLeft"><%= t ".total_amount" %></td>
+        <td class="tdRight bold"><span class="total"></span></td>
+      </tr>
+
+      <tr>
+        <td><%= t ".phone_number" %>
+          <span class="starRed">*</span>
+        </td>
+        <td>
+          <%= f.text_field :phone_number, class: "custMobileNo mobileValidate", required: true %>
+          <!-- <input type="text" class="custMobileNo   mobileValidate" name="custMobileNo" autocomplete="off" value=""> -->
+        </td>
+      </tr>
+      <tr class="borderBottom">
+        <td></td>
+        <td>
+          <div class="custMobileNoErr" style="color: red; margin-top: 0px; padding-left: 10px;"></div>
+        </td>
+      </tr>
+      <tr>
+        <td><%= t ".full_name" %>
+          <span class="starRed">*</span></td>
+        <td>
+          <%= f.text_field :name, class: "custName", required: true %>
+          <!-- <input type="text" class="custName" name="custName" autocomplete="off" value=""> -->
+        </td>
+      </tr>
+      <tr class="borderBottom">
+        <td></td>
+        <td>
+          <div class="custNameErr" style="color: red; margin-top: 0px; padding-left: 10px;"></div>
+        </td>
+      </tr>
+      <tr>
+        <td><%= t ".email" %></td>
+        <td>
+          <%= f.text_field :email, class: "custEmail"%>
+          <!-- <input type="email" class="custEmail" name="custEmail" value="" maxlengh="100" autocomplete="off"> -->
+        </td>
+      </tr>
+      <tr class="borderBottom">
+        <td></td>
+        <td>
+          <div class="custEmailErr" style="color: red; margin-top: 0px; padding-left: 10px;"></div>
+        </td>
+      </tr>
+      <tr class="trOfficePickup">
+        <td class="tdLeft"><%= t ".start_point" %> <span class="starRed">*</span></td>
+        <td class="tdRight">
+          <select name="" id="boardingPointSeclect" class="boardingPointSeclect pickupAddrSelect" style="cursor: pointer;" >
+            <option value="-1">-- <%= t ".choose_start_point" %> --</option>
+            <% trip.stop_points.each do |p| %>
+
+              <option value="<%= p.bus_station.name %>">-- <%= p.bus_station.name %> --</option>
+            <% end %>
+          </select>
+          <!-- <input type="text" style="cursor: pointer;" placeholder="--- Chọn điểm đón ---" class="class="pickupAddrSelect"" valueid="" readonly="readonly"> -->
+        </td>
+      </tr>
+      <div class="list_ticket">
+
+      </div>
+
+      <tr>
+        <td colspan="2">
+          <div class="payment" style="margin-top: 15px">
+            <%= f.submit "Đặt vé", class: "btnCont", style: "background-color: rgb(226, 70, 72);"  %>
+            <!-- <input class="btnCont" type="submit" value="Đặt vé" disabled="disabled" style="background-color: #CCCCCC;"> -->
+          </div>
+          <div class="eroSubmit hide" style="color: red; margin-top: 10px; margin-bottom: 5px;">&nbsp;</div>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<% end %>
