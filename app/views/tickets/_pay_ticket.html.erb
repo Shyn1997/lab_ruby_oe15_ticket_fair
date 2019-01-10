@@ -1,5 +1,5 @@
 <div class = "col-sm-4">
-  <% customer.tickets.each do |ticket| %>
+  <% tickets.each do |ticket| %>
   <ul class="list-group mt-5">
     <li class="list-group-item"><b><%= t ".code" %></b>: <%= ticket.code %></li>
     <li class="list-group-item"><b><%= t ".name_garare" %></b>: <%= ticket.trip.coach.garage.name %></li>

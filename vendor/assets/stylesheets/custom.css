@@ -21,13 +21,12 @@ body {
   height: auto;
   background: #fff !important;
 }
-.colorbg-dark{
+
+.colorbg-dark {
   background-color: #000;
 }
-.colorbg-gray{
-  background-color: #c5c4c4;
-}
-.colorbg-red{
+
+.colorbg-red {
   background-color: #e55042;
 }
 
@@ -37,6 +36,14 @@ body {
 .size-header {
   min-height: 22px;
   font-size: 14px;
+}
+
+.img-vi {
+  background-image: url(vi.png);
+}
+
+.img-en {
+  background-image: url(en.png);
 }
 
 .size-img-i18n {
@@ -57,9 +64,11 @@ body {
 .with-50 {
   width: 50%;
 }
-.img-car{
-	width: 126px;
-    height: 66px;
+
+.img-car {
+  background-image: url(car.png);
+  width: 126px;
+  height: 66px;
 }
 
 .txt-section-1 {
@@ -82,7 +91,7 @@ body {
 }
 
 .bg-section2 {
-  background: url("https://xeca.vn/images/banner-news.png") no-repeat;
+  background: url("http://cdn.kul.vn/data/article/2016/07/08/hawaii_1467971479.jpg") no-repeat;
   background-repeat: round;
 }
 
@@ -132,6 +141,37 @@ body {
 
 
 /*---------------------------------------------------------------End Section3--------------------*/
+/*---------------------------------------------------------------Footer--------------------*/
+
+
+/* Style tab links */
+
+.section-4 {
+  min-height: 380px;
+}
+
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.width-arc-footer {
+  width: 26%;
+}
+
+.tabcontent {
+  height: 250px;
+  border: 1px solid #666;
+}
+
+
 /*---------------------------------------------------------------Footer--------------------*/
 
 .footer {
@@ -262,11 +302,6 @@ nav a {
     width: 230px !important;
 }
 
-.top-footer{
-	width: 90%;
-    min-height: 304px;
-}
-
 .ticket-search-filter #searchSubmit {
     color: #fff;
     background: #177bd0 !important;
@@ -341,18 +376,10 @@ nav a {
     margin-left: 26px;
     border: 1px solid;
 }
-
 #departDate {
     border-radius: 5px !important;
 }
-.email-address{
-	width: 85%;
-	border: 1px;
-  background-color: #000!important;
-}
-.email{
-  width: 25px;
-}
+
 .ticket-search-filter .calendar-search {
     background: url(calendar-v2.svg) no-repeat 100%;
     background-color: #fff;
@@ -536,7 +563,7 @@ input, button, select, textarea {
 
 .bus-time-number {
     padding-left: 40px;
-    background: url(icon-bus-time.png) no-repeat;
+    background: url(https://xeca.vn/images/icon-bus-time.png) no-repeat;
     font-size: 16px;
 }
 
@@ -628,25 +655,21 @@ span.boarding-point, span.rule-ag {
     margin-top: 5px;
 }
 .bt-col-1 {
-    background: url(icon-clock.png) no-repeat;
+    background: url("https://xeca.vn/images/icon-clock.png") no-repeat;
     background-position: 0px 25px;
     width: 200px;
 }
 
 .bt-col-2 {
-    background: url(icon-bus-stop.png) no-repeat;
+    background: url("https://xeca.vn/images/icon-bus-stop.png") no-repeat;
     background-position: 0px 23px;
     width: 320px;
 }
 
 .bt-col-3 {
     width: 150px;
-    background: url(icon-seat.png) no-repeat;
+    background: url("https://xeca.vn/images/icon-seat.png") no-repeat;
     background-position: 0px 23px;
-}
-
-.whith-100{
-    width: 100%;
 }
 
 .bt-col-4 {
@@ -996,92 +1019,8 @@ input.btnCont {
     padding: 10px;
 }
 
-.left-search{
-	width: 25%;
-}
-
-.height-index{
-	min-height: 520px;
-}
-
-.mt{
-	margin-top: 50px;
-}
-.p1-cancelticket{
-	min-height: 50px;
-	color: #458265;
-	background-color: #dff0d8;
-}
-
-.pdr-0{
-	padding-right: 0px!important;
-}
-
-.height-pay{
-	min-height: 520px;
-}
-
 .img-vitri{
-	width: 39px;
+    width: 39px;
     height: 33px;
     margin-top: -5px;
-}
-
-.img-smart{
-	margin-left: 6%;
-}
-
-.with-choose{
-	with: 95%!important;
-}
-
-/*---------------------------------------------------------------tab nav--------------------*/
-nav > .nav.nav-tabs{
-
-    border: none;
-      color:#fff;
-      background:#272e38;
-      border-radius:0;
-  
-  }
-  nav > div a.nav-item.nav-link,
-  nav > div a.nav-item.nav-link.active
-  {
-    border: none;
-      padding: 18px 25px;
-      color:#fff;
-      background:#272e38;
-      border-radius:0;
-  }
-  
-  nav > div a.nav-item.nav-link.active:after
-   {
-    content: "";
-    position: relative;
-    bottom: -60px;
-    left: -10%;
-    border: 15px solid transparent;
-    border-top-color: #e74c3c ;
-  }
-  .tab-content{
-    background: #fdfdfd;
-      line-height: 25px;
-      border: 1px solid #ddd;
-      border-top:5px solid #e74c3c;
-      border-bottom:5px solid #e74c3c;
-      padding:30px 25px;
-  }
-  
-  nav > div a.nav-item.nav-link:hover,
-  nav > div a.nav-item.nav-link:focus
-  {
-    border: none;
-      background: #e74c3c;
-      color:#fff;
-      border-radius:0;
-      transition:background 0.20s linear;
-  }
-/*---------------------------------------------------------------tab nav--------------------*/
-.with-txt-tourist{
-    width: 200px;
 }

@@ -1,6 +1,7 @@
 class Garage < ApplicationRecord
   has_many :coaches, dependent: :destroy
   has_many :users, dependent: :destroy
+  has_many :trips, through: :coaches
 
   scope :search_garage, (lambda do |city_start, city_end, date|
     joins("LEFT JOIN coaches ON garages.id = coaches.garage_id
