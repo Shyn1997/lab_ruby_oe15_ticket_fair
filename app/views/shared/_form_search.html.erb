@@ -5,18 +5,20 @@
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <%= form.text_field :city_start, class: "location-search startPoint", value: params[:city_start] %>
       </div>
-      <div class="form-group hidden-xs ml-3">
-        <p class="switchButton">⇌</p>
+      <div class="form-group hidden-xs">
+        <p href="#" class="switchButton">⇌</p>
       </div>
-      <div class="form-group ml-3">
+      <div class="form-group">
         <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
         <%= form.text_field :city_end, class: "location-search startPoint", value: params[:city_end] %>
       </div>
-      <div class="form-group departDate-fg ml-5">
+      <div class="form-group departDate-fg">
         <%= form.text_field :time_start, class: "form-control date date-picker datePicker readonly", value: params[:time_start], "data-date-format"=>"dd-mm-yyyy", "data-date-start-date"=>"+0d", required: true, onkeypress: "return false;" %>
+        <div class="form-group quick-date-select fr hidden-xs hidden-sm">
+        </div>
       </div>
       <div class="form-group pull-right">
-        <%= form.submit "Tìm vé xe", class: "submit-btn btn  search-btn ml-5", id: "searchSubmit" %>
+        <%= form.submit "Tìm vé xe", class: "submit-btn btn  search-btn", id: "searchSubmit" %>
       </div>
     <% end %>
   </div>

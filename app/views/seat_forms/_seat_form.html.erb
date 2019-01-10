@@ -6,7 +6,8 @@
       </p>
       <ul>
         <% seats.where(types: 2).each do |seat| %>
-        <% status = if seat.ticket.nil? || seat.ticket.status == "cancel"
+        <% status = if seat.tickets.find_by(trip_id: trip.id).nil? || seat.tickets.find_by(trip_id: trip.id).status == "cancel"
+         #status = if seat.tickets.nil? || seat.ticket.status == "cancel"
                       "available"
                     else "unavailable"
                     end
@@ -27,7 +28,7 @@
     <p class="lower-driver"><span class="icon2 txt-2"></span></p>
     <ul>
       <% seats.where(types: 1).each do |seat| %>
-        <% status = if seat.ticket.nil? || seat.ticket.status == "cancel"
+        <% status = if seat.tickets.find_by(trip_id: trip.id).nil? || seat.tickets.find_by(trip_id: trip.id).status == "cancel"
                       "available"
                     else "unavailable"
                     end

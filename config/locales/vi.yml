@@ -9,7 +9,7 @@ vi:
 
   mail:
     confirm: "Xác nhận đã đặt vé cho quý khách"
-    guide_all_1: "30 phút sau khi thanh toán quý khách vẫn chưa nhận được tin nhắn và email, vui lòng liên hệ với NhaXe qua Hotline: 1900 7075 (miền Bắc) hoặc 
+    guide_all_1: "30 phút sau khi thanh toán quý khách vẫn chưa nhận được tin nhắn và email, vui lòng liên hệ với NhaXe qua Hotline: 1900 7075 (miền Bắc) hoặc
     1900 969681 - 1900 7070 (miền Nam)."
     guide_all_2: "Hướng dẫn thanh toán"
     guide_all_3: "1. Quý khách vui lòng đem mã đặt chỗ đến phòng vé của nhà xe để thanh toán tối đa 2 tiếng kể từ khi đặt vé. Sau thời gian này vé chưa thanh toán sẽ tự động bị hủy."
@@ -45,7 +45,6 @@ vi:
         email: "Email"
         password: "Mật khẩu"
         password_confirmation: "xác nhận"
-  
   tickets:
     form_search_ticket:
       phone_number: "Số điện thoại"
@@ -111,9 +110,9 @@ vi:
       agree: "Tôi đồng ý với quy chế của nhà xe"
     pay_form:
       pay_ticket: "Thanh toán"
-    after_pay: 
+    after_pay:
       confirm: "Xác nhận đã đặt vé cho quý khách"
-      guide_all_1: "30 phút sau khi thanh toán quý khách vẫn chưa nhận được tin nhắn và email, vui lòng liên hệ với NhaXe qua Hotline: 1900 7075 (miền Bắc) hoặc 
+      guide_all_1: "30 phút sau khi thanh toán quý khách vẫn chưa nhận được tin nhắn và email, vui lòng liên hệ với NhaXe qua Hotline: 1900 7075 (miền Bắc) hoặc
     1900 969681 - 1900 7070 (miền Nam)."
       guide_all_2: "Hướng dẫn thanh toán"
       guide_all_3: "1. Quý khách vui lòng đem mã đặt chỗ đến phòng vé của nhà xe để thanh toán tối đa 2 tiếng kể từ khi đặt vé. Sau thời gian này vé chưa thanh toán sẽ tự động bị hủy."

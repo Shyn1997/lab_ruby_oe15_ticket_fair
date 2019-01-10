@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2018_12_19_085845) do
 
   create_table "coaches", force: :cascade do |t|
     t.string "license_plate"
-    t.integer "types"
+    t.string "types"
     t.integer "seat_amount"
     t.integer "seat_form"
     t.bigint "garage_id"

@@ -93,6 +93,12 @@ $(document).ready(function(){
       var attr_name = ".ticket-" + seat_id;
       $(this).parents(".bus-time-booking").find(".list_ticket").children().remove(attr_name);
       $(this).parent("li").attr("class","seat sleeper available");
+      $(this).parents(".bus-time-booking").find(".selectedSeat").html('');
+      $(".ticket").each(function(index){
+        var seat = $(this).attr("data-seat");
+
+        $(this).parents(".bus-time-booking").find(".selectedSeat").append(seat + ", ");
+      });
     }
     else if (status == "available") {
       var trip_id = $(this).attr("data-trip");
@@ -102,11 +108,16 @@ $(document).ready(function(){
       var total = parseFloat($(this).parents(".bus-time-booking").find(".total").html()) + fare;
       var n = $(".ticket").size();
       $(this).attr("data-status", "selected");
-      $(this).parents(".bus-time-booking").find(".list_ticket").append("<div class='ticket ticket-"+seat_id+"' ><input type='hidden' name='customer[tickets_attributes][" + n + "][seat_id]' value='" + seat_id +"' id='customer_tickets_attributes_0_trip_id'><input type='hidden' name='customer[tickets_attributes][" + n + "][trip_id]' value='" + trip_id +"' id='customer_tickets_attributes_0_trip_id'><input type='hidden' name='customer[tickets_attributes][" + n + "][bus_station]' value='" + bus_station +"' id='customer_tickets_attributes_"+n+"_seat_id'></div>");
+      $(this).parents(".bus-time-booking").find(".list_ticket").append("<div class='ticket ticket-"+seat_id+"' data-seat='"+seat_code+"' ><input type='hidden' class='booking-ticket' name='customer[tickets_attributes][" + n + "][seat_id]' value='" + seat_id +"' id='customer_tickets_attributes_0_trip_id'><input type='hidden' name='customer[tickets_attributes][" + n + "][trip_id]' value='" + trip_id +"' id='customer_tickets_attributes_0_trip_id'></div>");
       $(this).parent("li").attr("class","seat sleeper selected");
-      $(this).parents(".bus-time-booking").find(".selectedSeat").append(seat_code + ", ");
+      $(this).parents(".bus-time-booking").find(".selectedSeat").html('');
+      $(".ticket").each(function(index){
+        var seat = $(this).attr("data-seat");
+
+        $(this).parents(".bus-time-booking").find(".selectedSeat").append(seat + ", ");
+      });
+
       $(this).parents(".bus-time-booking").find(".total").html(fare);
     }
   });
 });
-

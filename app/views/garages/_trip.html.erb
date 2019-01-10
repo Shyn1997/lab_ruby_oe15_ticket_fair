@@ -27,7 +27,8 @@
           <span class="total-seat"> <%= trip.coach.seat_amount %> &nbsp;<%= t ".seat_online" %> </span>
         </div>
         <div class="bus-item-info">
-        (<%= trip.coach.types %>)
+        <!-- (<%= trip.coach.types %>) -->
+        (Xe giường nằm)
         </div>
         <span class="rule-ag"> Chính sách hủy vé </span>
       </div>
@@ -52,7 +53,6 @@
           </div>
           <%= render "note" %>
         </div>
-        
         <%= render "booking", trip: trip, customer: customer %>
       </div>
     </div>

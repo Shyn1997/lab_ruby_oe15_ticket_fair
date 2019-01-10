@@ -71,13 +71,14 @@
       <tr class="trOfficePickup">
         <td class="tdLeft"><%= t ".start_point" %> <span class="starRed">*</span></td>
         <td class="tdRight">
-          <select name="" id="boardingPointSeclect" class="boardingPointSeclect pickupAddrSelect" style="cursor: pointer;" >
+          <%= f.select :bus_stop, options_for_select(trip.stop_points.collect { |p| [ p.bus_station.name ] }, "Select")%>
+          <!-- <select name="bus_stop" id="boardingPointSeclect" class="boardingPointSeclect pickupAddrSelect" style="cursor: pointer;" >
             <option value="-1">-- <%= t ".choose_start_point" %> --</option>
             <% trip.stop_points.each do |p| %>
 
               <option value="<%= p.bus_station.name %>">-- <%= p.bus_station.name %> --</option>
             <% end %>
-          </select>
+          </select> -->
           <!-- <input type="text" style="cursor: pointer;" placeholder="--- Chọn điểm đón ---" class="class="pickupAddrSelect"" valueid="" readonly="readonly"> -->
         </td>
       </tr>

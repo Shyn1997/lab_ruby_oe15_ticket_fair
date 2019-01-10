@@ -40,9 +40,9 @@
           <input type="checkbox"><%= t ".agree" %>
         </div>
         <p class = "mt-4"></p>
-        <%= render "tickets/pay_form",customer: @customer%>
+        <%= render "tickets/pay_form", id_tickets: @id_tickets%>
       </div>
     </div>
   </div>
-  <%= render "tickets/pay_ticket", customer: @customer%>
+  <%= render "tickets/pay_ticket", tickets: @tickets%>
 </div>

@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
   private
 
   def change_to_ajax
-    @cities = City.city_names
+    @cities = City.all.map(&:name)
     render json: @cities.to_json
   end
 end
