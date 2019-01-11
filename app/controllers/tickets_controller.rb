@@ -15,7 +15,7 @@ class TicketsController < ApplicationController
     if params[:status] == "cancel"
       @ticket = find_ticket params[:id]
 
-      @ticket.status_cancel!
+      @ticket.status_cancel! 
 
       flash.now[:danger] = t ".cancel_fail" unless @ticket.status_cancel?
       redirect_to request.referrer

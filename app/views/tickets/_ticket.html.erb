@@ -1,0 +1,25 @@
+<div class = "border border-danger">
+  <h3 class = "font-weight-bold text-center mt-3"><%= t ".ticket_information" %></h3>
+  <div class = "d-flex">
+    <ul class="list-group col-sm-6">
+      <li class="list-group-item"><b><%= t ".code" %></b>: <%= ticket.code %></li>
+      <li class="list-group-item"><b><%= t ".name_garare" %></b>: <%= ticket.trip.coach.garage.name %></li>
+      <li class="list-group-item"><b><%= t ".license_plate" %></b>: <%= ticket.trip.coach.license_plate %></li>
+      <li class="list-group-item"><b><%= t ".day_start" %></b>: <%= ticket.trip.created_at %></li>
+      <li class="list-group-item"><b><%= t ".point_start" %></b>: <%= ticket.trip.city_start %></li>
+      <li class="list-group-item"><b><%= t ".point_finish" %></b>: <%= ticket.trip.city_finish %></li>
+    </ul>
+    <ul class="list-group col-sm-6 pdr-0">
+      <li class="list-group-item"><b><%= t ".name" %></b>: <%= ticket.customer.name %></li>
+      <li class="list-group-item"><b><%= t ".phone_number" %></b>: <%= ticket.customer.phone_number %></li>
+      <li class="list-group-item"><b><%= t ".email" %></b>: <%= ticket.customer.email %></li>
+      <li class="list-group-item"><b><%= t ".ticket_price" %></b>: <%= ticket.trip.fare %></li>
+      <li class="list-group-item"><b><%= t ".seat" %></b>: <%= ticket.seat.code%></li>
+      <% if ticket.status_pending? %>
+        <li class="list-group-item"><b><%= t ".status_cancel" %></b>: <span class = "bg-warning"><%= ticket.status %></span></li>
+      <% else %>
+        <li class="list-group-item"><b><%= t ".status_cancel" %></b>: <span class = "bg-secondary"><%= ticket.status %></span></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

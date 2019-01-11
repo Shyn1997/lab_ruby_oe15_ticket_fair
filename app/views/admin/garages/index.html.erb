@@ -1,0 +1,52 @@
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3><%= @title %> <small>  <strong></strong></small></h3>
+    </div>
+  </div>
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Danh sách <%= @title %> <small></small></h2>
+        <%= link_to new_admin_garage_path, class: "btn btn-primary pull-right", style: "margin-right: 5px;" do %>
+        <i class="fa fa-plus"></i> Thêm mới
+        <% end %>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content" style="display: block;">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th> Tên </th>
+              <th> Ảnh </th>
+              <th> Số điện thoại </th>
+              <th> Địa chỉ </th>
+              <th> Thông tin </th>
+              <th> Edit </th>
+              <th> Delete </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @garages.any? %>
+            <% @garages.each do |gara| %>
+            <tr>
+              <td> <%= gara.name %> </td>
+              <td> <%= gara.image %> </td>
+              <td> <%= gara.phone_number %> </td>
+              <td> <%= gara.address %> </td>
+              <td> <%= gara.info %> </td>
+              <td>
+                <%= link_to "Edit", "#", class: "edit" %>
+              </td>
+              <td>
+                <%= link_to "Delete", "#", class: "delete" %>
+              </td>
+            </tr>
+            <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

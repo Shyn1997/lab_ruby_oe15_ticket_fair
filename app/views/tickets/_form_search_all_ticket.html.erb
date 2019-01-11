@@ -1,0 +1,6 @@
+<%= form_with url: tickets_path, local: true, method: :get, html: {class: "mt-5"} do |f| %>
+  <%= hidden_field_tag :search, "search" %>
+  <p class = "h3 font-weight-bold"><%= t".phone_number" %></p>
+  <%= f.text_field :phone_number, class: "form-control" %>
+  <%= f.submit t(".check_ticket"), class: "btn form-control colorbg-red mt-4 mb-4 text-white " %>
+<% end %>

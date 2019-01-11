@@ -1,0 +1,48 @@
+<div class = "d-flex justify-content-between container height-pay">
+  <div class = "col-sm-7">
+    <h4 class = "mt-5"><%= t "please_choose" %></h4>
+    <div class = "border mt-2">
+      <button class = "btn form-control d-flex border" id = "buton1">
+        <%= image_tag "vitri.png", class: "img-vitri"%>
+        <p class = "font-weight-bold ml-4"><%= t ".pay_store" %></p>
+      </button>
+      <div id = "tg-buton1">
+        <p class ="mt-3 col-sm-12 mx-auto"><%= t ".guide_pay_store" %><p>
+        <%= image_tag "smart.png", class: "img-smart mt-3"%>
+        <div class="checkbox-inline mt-3 ml-3">
+          <input type="checkbox"><%= t ".agree" %>
+        </div>
+        <p class = "mt-4"></p>
+         <%= render "tickets/pay_form",customer: @customer%>
+        </button>
+      </div>
+    </div>
+    <div class = "border">
+      <button class = "btn form-control d-flex border" id = "buton2">
+        <%= image_tag "card.png", class: "img-vitri"%>
+        <p class = "font-weight-bold ml-4"><%= t ".pay_card" %></p>
+      </button>
+      <div id = "tg-buton2">
+        <p class ="mt-3 col-sm-12 mx-auto"><%= t ".guide_1" %><p>
+        <p class ="mt-2 col-sm-12 mx-auto"><%= t ".guide_2" %><p>
+        <div class="form-group">
+          <select class="form-control mt-3">
+            <option><%= t ".bank_1" %></option>
+            <option><%= t ".bank_2" %></option>
+            <option><%= t ".bank_3" %></option>
+            <option><%= t ".bank_4" %></option>
+            <option><%= t ".bank_5" %></option>
+            <option><%= t ".bank_6" %></option>
+          </select>
+        </div>
+        <p class ="mt-2 col-sm-12 mx-auto"><%= t ".guide_3" %><p>
+        <div class="checkbox-inline mt-3 ml-3">
+          <input type="checkbox"><%= t ".agree" %>
+        </div>
+        <p class = "mt-4"></p>
+        <%= render "tickets/pay_form", id_tickets: @id_tickets%>
+      </div>
+    </div>
+  </div>
+  <%= render "tickets/pay_ticket", tickets: @tickets%>
+</div>

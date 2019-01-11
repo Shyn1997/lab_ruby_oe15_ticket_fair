@@ -1,0 +1,20 @@
+<div class = "col-sm-4">
+  <% tickets.each do |ticket| %>
+  <ul class="list-group mt-5">
+    <li class="list-group-item"><b><%= t ".code" %></b>: <%= ticket.code %></li>
+    <li class="list-group-item"><b><%= t ".name_garare" %></b>: <%= ticket.trip.coach.garage.name %></li>
+    <li class="list-group-item"><b><%= t ".license_plate" %></b>: <%= ticket.trip.coach.license_plate %></li>
+    <li class="list-group-item"><b><%= t ".day_start" %></b>: <%= ticket.trip.created_at %></li>
+    <li class="list-group-item"><b><%= t ".point_start" %></b>: <%= ticket.trip.city_start %></li>
+    <li class="list-group-item"><b><%= t ".point_finish" %></b>: <%= ticket.trip.city_finish %></li>
+  </ul>
+  <ul class="list-group pdr-0">
+    <li class="list-group-item"><b><%= t ".name" %></b>: <%= ticket.customer.name %></li>
+    <li class="list-group-item"><b><%= t ".Phone_number" %></b>: <%= ticket.customer.phone_number %></li>
+    <li class="list-group-item"><b><%= t ".email" %></b>: <%= ticket.customer.email %></li>
+    <li class="list-group-item"><b><%= t ".ticket_price" %></b>: <%= ticket.trip.fare %></li>
+    <li class="list-group-item"><b><%= t ".seat" %></b>: <%= ticket.seat.code%></li>
+    <li class="list-group-item"><b><%= t ".status_cancel" %></b>: <%= ticket.status %></li>
+  </ul>
+  <% end %>
+</div>

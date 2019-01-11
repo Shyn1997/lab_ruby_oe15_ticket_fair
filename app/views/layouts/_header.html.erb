@@ -3,7 +3,7 @@
     <div class="float-right d-flex">
       <p class="mr-3"><%= t ".hotline"%></p>
       <p class="mr-3"><%= t ".email" %></p>
-      <% if logged_in? %>
+      <% if user_signed_in? %>
         <%= link_to t(".log_out"), logout_path, method: :delete%>
       <% else %>
         <%= link_to t(".log_in"), "", data: { toggle: "modal", target: "#exampleModalCenter" }%>

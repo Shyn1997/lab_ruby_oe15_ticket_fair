@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>admin</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "admin", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_include_tag "admin", "data-turbolinks-track": "reload" %>
+  </head>
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <%= render "layouts/sidebar" %>
+      <%= render "layouts/header_admin" %>
+      <div class="right_col" role="main" style="min-height: 774px;">
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
+        <%= yield %>
+      </div>
+      <footer>
+        <%= render "layouts/footer_admin" %>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

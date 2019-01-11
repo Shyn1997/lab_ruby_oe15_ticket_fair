@@ -1,5 +1,6 @@
 class GaragesController < ApplicationController
   before_action :check_datetime, only: :index
+  before_action :downcase_params, only: :index
 
   def index
     @garages = Garage.search_garage params[:city_start], params[:city_end],
@@ -16,6 +17,12 @@ class GaragesController < ApplicationController
   end
 
   private
+
+  def downcase_params
+    params[:city_start].downcase!
+    params[:city_end].downcase!
+  end
+
 
   def check_datetime
     return if params[:time_start].present?

@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations"
+  }
   scope "(:locale)", locale: /en|vi/ do
     get "/login", to: "sessions#new"
     post "/login", to: "sessions#create"
-    delete "/logout", to: "sessions#destroy"
+    delete "/logout", to: "devise/sessions#destroy"
     resources :static_pages, only: :index
     root "static_pages#index"
     resources :garages

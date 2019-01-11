@@ -132,6 +132,7 @@ vi:
       ticket: "Vé xe khách"
       coach: "xe đi"
       no_garage: "Không tìm thấy chuyến xe"
+
     garage:
       hotline: "Tổng đài đặt vé online:"
       view: "Xem chuyến xe"

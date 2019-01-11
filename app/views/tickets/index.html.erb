@@ -1,0 +1,30 @@
+<div class = "container height-index-cancel d-flex justify-content-between">
+  <% if params[:search] == :cancel.to_s %>
+    <div class="left-search">
+      <%= render "form_search_ticket" %>
+    </div>
+    <div class = " col-sm-8 mt">
+      <% if @ticket.present? %>
+        <%= render "ticket", ticket: @ticket %>
+        <% if @ticket.status_pending? %>
+          <%= render "cancel" %>
+        <% else %>
+          <p class = "form-control colorbg-gray text-white text-center">Cancelled</p>
+        <% end %>
+      <% else %>
+        <p class = "p1-cancelticket text-center form-control "><%= t ".please_check" %></p>
+      <% end %>
+    </div>
+  <% elsif params[:search] == :search.to_s %>
+    <div class="left-search ">
+      <%= render "form_search_all_ticket" %>
+    </div>
+    <div class = "col-sm-8 mt">
+      <% if @tickets.present? %>
+          <%= render @tickets %>
+      <% else %>
+        <p class = "p1-cancelticket text-center form-control "><%= t ".please_check" %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

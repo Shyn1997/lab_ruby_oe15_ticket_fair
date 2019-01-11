@@ -26,6 +26,9 @@ en:
       garage: "GARAGE"
       log_in: "Log in"
       log_out: "Log out"
+    header_admin:
+      profile: "My Profile"
+      logout: "Logout"
 
   activerecord:
     models:
@@ -106,3 +109,7 @@ en:
       time_note: "Bạn cần đến trước 30 phút để sắp xếp hành lý."
       info_note: "Để biết thêm thông tin chi tiết vui lòng liên hệ tổng đài"
       hotline: "CSKH:"
+
+  admin:
+    garages:
+      title: "Nhà xe"
