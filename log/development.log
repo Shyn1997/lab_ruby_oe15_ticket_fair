@@ -1,0 +1,2333 @@
+  [1m[35m (232.5ms)[0m  [1m[35mCREATE DATABASE "lab_ruby_oe15_ticket_fair_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (233.8ms)[0m  [1m[35mCREATE DATABASE "lab_ruby_oe15_ticket_fair_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1526437648807847685)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateGarages (20181214085749)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "garages" ("id" bigserial primary key, "name" character varying, "phone_number" character varying, "address" character varying, "info" text, "image" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181214085749_create_garages.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181214085749"]]
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCoaches (20181215090115)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "coaches" ("id" bigserial primary key, "license_plate" character varying, "types" character varying, "seat_amount" integer, "seat_form" integer, "garage_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e93fa3fb7d"
+FOREIGN KEY ("garage_id")
+  REFERENCES "garages" ("id")
+)[0m
+  ↳ db/migrate/20181215090115_create_coaches.rb:3
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE  INDEX  "index_coaches_on_garage_id" ON "coaches"  ("garage_id")[0m
+  ↳ db/migrate/20181215090115_create_coaches.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181215090115"]]
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTrips (20181216090918)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE TABLE "trips" ("id" bigserial primary key, "time_start" timestamp, "time_finish" timestamp, "city_start" character varying, "city_finish" character varying, "coach_id" bigint, "is_repeated" boolean, "fare" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_2e256bef7a"
+FOREIGN KEY ("coach_id")
+  REFERENCES "coaches" ("id")
+)[0m
+  ↳ db/migrate/20181216090918_create_trips.rb:3
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE  INDEX  "index_trips_on_coach_id" ON "trips"  ("coach_id")[0m
+  ↳ db/migrate/20181216090918_create_trips.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181216090918"]]
+  ↳ bin/rails:9
+  [1m[35m (4.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCustomers (20181217083712)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "name" character varying, "phone_number" character varying, "email" character varying, "bus_stop" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181217083712_create_customers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217083712"]]
+  ↳ bin/rails:9
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateSeats (20181217092030)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (13.1ms)[0m  [1m[35mCREATE TABLE "seats" ("id" bigserial primary key, "code" character varying, "types" integer, "coach_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181217092030_create_seats.rb:3
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE  INDEX  "index_seats_on_coach_id" ON "seats"  ("coach_id")[0m
+  ↳ db/migrate/20181217092030_create_seats.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217092030"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTickets (20181217092035)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "tickets" ("id" bigserial primary key, "trip_id" bigint, "customer_id" bigint, "status" integer DEFAULT 2, "code" character varying, "seat_id" bigint, "bus_stop" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_9c1d68f869"
+FOREIGN KEY ("trip_id")
+  REFERENCES "trips" ("id")
+, CONSTRAINT "fk_rails_5685ed71b0"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+, CONSTRAINT "fk_rails_b0904b94e1"
+FOREIGN KEY ("seat_id")
+  REFERENCES "seats" ("id")
+)[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_trip_id" ON "tickets"  ("trip_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_customer_id" ON "tickets"  ("customer_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_seat_id" ON "tickets"  ("seat_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217092035"]]
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCities (20181218013030)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (17.9ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "name" character varying, "types" character varying)[0m
+  ↳ db/migrate/20181218013030_create_cities.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218013030"]]
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateBusStations (20181218090750)
+  [1m[35m (1.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "bus_stations" ("id" bigserial primary key, "name" character varying, "city_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0879d1dc55"
+FOREIGN KEY ("city_id")
+  REFERENCES "cities" ("id")
+)[0m
+  ↳ db/migrate/20181218090750_create_bus_stations.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_bus_stations_on_city_id" ON "bus_stations"  ("city_id")[0m
+  ↳ db/migrate/20181218090750_create_bus_stations.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218090750"]]
+  ↳ bin/rails:9
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateStopPoints (20181218091714)
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "stop_points" ("id" bigserial primary key, "time_stop" time, "types" integer, "trip_id" bigint, "bus_station_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_1035516bf3"
+FOREIGN KEY ("trip_id")
+  REFERENCES "trips" ("id")
+, CONSTRAINT "fk_rails_189d68eded"
+FOREIGN KEY ("bus_station_id")
+  REFERENCES "bus_stations" ("id")
+)[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_stop_points_on_trip_id" ON "stop_points"  ("trip_id")[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_stop_points_on_bus_station_id" ON "stop_points"  ("bus_station_id")[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218091714"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDistricts (20181218093121)
+  [1m[35m (1.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "districts" ("id" bigserial primary key, "name" character varying, "types" character varying, "city_id" bigint)[0m
+  ↳ db/migrate/20181218093121_create_districts.rb:3
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_districts_on_city_id" ON "districts"  ("city_id")[0m
+  ↳ db/migrate/20181218093121_create_districts.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218093121"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20181218093550)
+  [1m[35m (4.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "phone_number" character varying, "admin" boolean, "garage_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_f26f3b17ed"
+FOREIGN KEY ("garage_id")
+  REFERENCES "garages" ("id")
+)[0m
+  ↳ db/migrate/20181218093550_create_users.rb:3
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_garage_id" ON "users"  ("garage_id")[0m
+  ↳ db/migrate/20181218093550_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218093550"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddDeviseToUsers (20190115150601)
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (9.0ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying DEFAULT '' NOT NULL[0m
+  ↳ db/migrate/20190115150601_add_devise_to_users.rb:7
+  [1m[35m (8.1ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  ↳ db/migrate/20190115150601_add_devise_to_users.rb:8
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  ↳ db/migrate/20190115150601_add_devise_to_users.rb:11
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp[0m
+  ↳ db/migrate/20190115150601_add_devise_to_users.rb:12
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  ↳ db/migrate/20190115150601_add_devise_to_users.rb:15
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  ↳ db/migrate/20190115150601_add_devise_to_users.rb:40
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  ↳ db/migrate/20190115150601_add_devise_to_users.rb:41
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190115150601"]]
+  ↳ bin/rails:9
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-01-23 09:56:04.091876"], ["updated_at", "2019-01-23 09:56:04.091876"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1526437648807847685)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.9ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Hồ"], ["phone_number", "8427322851"], ["address", "Quảng Ninh"], ["info", "Hết tàu nón ngọt tủ."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.650071"], ["updated_at", "2019-01-23 09:56:18.650071"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Hà"], ["phone_number", "7017099788"], ["address", "Quảng Ngãi"], ["info", "Xuồng biển thích áo bạn."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.655439"], ["updated_at", "2019-01-23 09:56:18.655439"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Tô"], ["phone_number", "4425387018"], ["address", "Lạng Sơn"], ["info", "Việc làm tô đồng leo."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.659820"], ["updated_at", "2019-01-23 09:56:18.659820"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Trương"], ["phone_number", "0072379083"], ["address", "Long An"], ["info", "Giết hàng khâu giày tám."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.664293"], ["updated_at", "2019-01-23 09:56:18.664293"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Đoàn"], ["phone_number", "2013703173"], ["address", "Hải Dương"], ["info", "Xe gì khoảng tôi được."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.669199"], ["updated_at", "2019-01-23 09:56:18.669199"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (4.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Tăng"], ["phone_number", "0464638383"], ["address", "Phú Thọ"], ["info", "Mua mượn tủ sáu xanh."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.678007"], ["updated_at", "2019-01-23 09:56:18.678007"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Tô"], ["phone_number", "2327250764"], ["address", "Hưng Yên"], ["info", "Á xuồng được bơi ngọt."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.682229"], ["updated_at", "2019-01-23 09:56:18.682229"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.5ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Phan"], ["phone_number", "2666571719"], ["address", "Quảng Trị"], ["info", "Bạn nón là ác bàn."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.686747"], ["updated_at", "2019-01-23 09:56:18.686747"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Nguyễn"], ["phone_number", "7488283101"], ["address", "TP Cần Thơ"], ["info", "Hết tủ độc một hết."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.691458"], ["updated_at", "2019-01-23 09:56:18.691458"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Đoàn"], ["phone_number", "6353165862"], ["address", "Đồng Nai"], ["info", "Gió độc một hai thuyền."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-01-23 09:56:18.695409"], ["updated_at", "2019-01-23 09:56:18.695409"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.7ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (1.0ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S9654338G"], ["types", "Xe giường nằm"], ["seat_amount", 28], ["seat_form", 1], ["garage_id", 5], ["created_at", "2019-01-23 09:56:18.745778"], ["updated_at", "2019-01-23 09:56:18.745778"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.7ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S8008396C"], ["types", "Xe giường nằm"], ["seat_amount", 27], ["seat_form", 2], ["garage_id", 2], ["created_at", "2019-01-23 09:56:18.752645"], ["updated_at", "2019-01-23 09:56:18.752645"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (4.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.5ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S7472175C"], ["types", "Xe giường nằm"], ["seat_amount", 28], ["seat_form", 1], ["garage_id", 7], ["created_at", "2019-01-23 09:56:18.762668"], ["updated_at", "2019-01-23 09:56:18.762668"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.5ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S7289240B"], ["types", "Xe giường nằm"], ["seat_amount", 26], ["seat_form", 1], ["garage_id", 10], ["created_at", "2019-01-23 09:56:18.768118"], ["updated_at", "2019-01-23 09:56:18.768118"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.5ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S6285986E"], ["types", "Xe giường nằm"], ["seat_amount", 35], ["seat_form", 1], ["garage_id", 7], ["created_at", "2019-01-23 09:56:18.773511"], ["updated_at", "2019-01-23 09:56:18.773511"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.6ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S5773571F"], ["types", "Xe giường nằm"], ["seat_amount", 28], ["seat_form", 1], ["garage_id", 9], ["created_at", "2019-01-23 09:56:18.778936"], ["updated_at", "2019-01-23 09:56:18.778936"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.2ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.5ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S7423098I"], ["types", "Xe giường nằm"], ["seat_amount", 29], ["seat_form", 1], ["garage_id", 4], ["created_at", "2019-01-23 09:56:18.784544"], ["updated_at", "2019-01-23 09:56:18.784544"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.5ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S9329708C"], ["types", "Xe giường nằm"], ["seat_amount", 26], ["seat_form", 2], ["garage_id", 2], ["created_at", "2019-01-23 09:56:18.790265"], ["updated_at", "2019-01-23 09:56:18.790265"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.2ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.4ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S9255149J"], ["types", "Xe giường nằm"], ["seat_amount", 30], ["seat_form", 1], ["garage_id", 8], ["created_at", "2019-01-23 09:56:18.795702"], ["updated_at", "2019-01-23 09:56:18.795702"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.2ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.4ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S7964932E"], ["types", "Xe giường nằm"], ["seat_amount", 40], ["seat_form", 1], ["garage_id", 7], ["created_at", "2019-01-23 09:56:18.800962"], ["updated_at", "2019-01-23 09:56:18.800962"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (1.0ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C1"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.822783"], ["updated_at", "2019-01-23 09:56:18.822783"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C2"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.829429"], ["updated_at", "2019-01-23 09:56:18.829429"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.7ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C3"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.834481"], ["updated_at", "2019-01-23 09:56:18.834481"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C4"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.839946"], ["updated_at", "2019-01-23 09:56:18.839946"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.5ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C5"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.845669"], ["updated_at", "2019-01-23 09:56:18.845669"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.5ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C6"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.851488"], ["updated_at", "2019-01-23 09:56:18.851488"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C7"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.856460"], ["updated_at", "2019-01-23 09:56:18.856460"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C8"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.861674"], ["updated_at", "2019-01-23 09:56:18.861674"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C9"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.867273"], ["updated_at", "2019-01-23 09:56:18.867273"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C10"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.872720"], ["updated_at", "2019-01-23 09:56:18.872720"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C11"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.877768"], ["updated_at", "2019-01-23 09:56:18.877768"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C12"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.883401"], ["updated_at", "2019-01-23 09:56:18.883401"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C13"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.888899"], ["updated_at", "2019-01-23 09:56:18.888899"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C14"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.893582"], ["updated_at", "2019-01-23 09:56:18.893582"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C15"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.898217"], ["updated_at", "2019-01-23 09:56:18.898217"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C16"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.903430"], ["updated_at", "2019-01-23 09:56:18.903430"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C17"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.908612"], ["updated_at", "2019-01-23 09:56:18.908612"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C18"], ["types", 1], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.914085"], ["updated_at", "2019-01-23 09:56:18.914085"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C19"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.919389"], ["updated_at", "2019-01-23 09:56:18.919389"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C20"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.924648"], ["updated_at", "2019-01-23 09:56:18.924648"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C21"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.930172"], ["updated_at", "2019-01-23 09:56:18.930172"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C22"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.936304"], ["updated_at", "2019-01-23 09:56:18.936304"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C23"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.941864"], ["updated_at", "2019-01-23 09:56:18.941864"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C24"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.948371"], ["updated_at", "2019-01-23 09:56:18.948371"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C25"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.953389"], ["updated_at", "2019-01-23 09:56:18.953389"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C26"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.958690"], ["updated_at", "2019-01-23 09:56:18.958690"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C27"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.963497"], ["updated_at", "2019-01-23 09:56:18.963497"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C28"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.968934"], ["updated_at", "2019-01-23 09:56:18.968934"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C29"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.974020"], ["updated_at", "2019-01-23 09:56:18.974020"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C30"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.979436"], ["updated_at", "2019-01-23 09:56:18.979436"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C31"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.985290"], ["updated_at", "2019-01-23 09:56:18.985290"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C32"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.991061"], ["updated_at", "2019-01-23 09:56:18.991061"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C33"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:18.996467"], ["updated_at", "2019-01-23 09:56:18.996467"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.9ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C34"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:19.002941"], ["updated_at", "2019-01-23 09:56:19.002941"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C35"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:19.009135"], ["updated_at", "2019-01-23 09:56:19.009135"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C36"], ["types", 2], ["coach_id", 1], ["created_at", "2019-01-23 09:56:19.014336"], ["updated_at", "2019-01-23 09:56:19.014336"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C1"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.018899"], ["updated_at", "2019-01-23 09:56:19.018899"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C2"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.024202"], ["updated_at", "2019-01-23 09:56:19.024202"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C3"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.029545"], ["updated_at", "2019-01-23 09:56:19.029545"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C4"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.034931"], ["updated_at", "2019-01-23 09:56:19.034931"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C5"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.041177"], ["updated_at", "2019-01-23 09:56:19.041177"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C6"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.046557"], ["updated_at", "2019-01-23 09:56:19.046557"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C7"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.052147"], ["updated_at", "2019-01-23 09:56:19.052147"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C8"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.057542"], ["updated_at", "2019-01-23 09:56:19.057542"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C9"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.063453"], ["updated_at", "2019-01-23 09:56:19.063453"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C10"], ["types", 1], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.069906"], ["updated_at", "2019-01-23 09:56:19.069906"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C11"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.076728"], ["updated_at", "2019-01-23 09:56:19.076728"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C12"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.082784"], ["updated_at", "2019-01-23 09:56:19.082784"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C13"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.088546"], ["updated_at", "2019-01-23 09:56:19.088546"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C14"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.094686"], ["updated_at", "2019-01-23 09:56:19.094686"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C15"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.099574"], ["updated_at", "2019-01-23 09:56:19.099574"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.5ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C16"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.104738"], ["updated_at", "2019-01-23 09:56:19.104738"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C17"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.109835"], ["updated_at", "2019-01-23 09:56:19.109835"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C18"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.115058"], ["updated_at", "2019-01-23 09:56:19.115058"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C19"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.120672"], ["updated_at", "2019-01-23 09:56:19.120672"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C20"], ["types", 2], ["coach_id", 2], ["created_at", "2019-01-23 09:56:19.126939"], ["updated_at", "2019-01-23 09:56:19.126939"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:58
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:58
+  [1m[36mTrip Create (1.0ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-01-23 09:56:19.134235"], ["time_finish", "2019-01-23 09:56:19.134236"], ["city_start", "hà nội"], ["city_finish", "hà giang"], ["coach_id", 1], ["is_repeated", true], ["created_at", "2019-01-23 09:56:19.153241"], ["updated_at", "2019-01-23 09:56:19.153241"]]
+  ↳ db/seeds.rb:58
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:58
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:65
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:65
+  [1m[36mTrip Create (0.6ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-01-23 09:56:19.161111"], ["time_finish", "2019-01-23 09:56:19.161112"], ["city_start", "hà nội"], ["city_finish", "nghệ an"], ["coach_id", 2], ["is_repeated", true], ["created_at", "2019-01-23 09:56:19.163950"], ["updated_at", "2019-01-23 09:56:19.163950"]]
+  ↳ db/seeds.rb:65
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:65
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:72
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:72
+  [1m[36mTrip Create (0.7ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-01-23 09:56:19.167353"], ["time_finish", "2019-01-23 09:56:19.167353"], ["city_start", "hà nội"], ["city_finish", "thanh hóa"], ["coach_id", 3], ["is_repeated", true], ["created_at", "2019-01-23 09:56:19.170104"], ["updated_at", "2019-01-23 09:56:19.170104"]]
+  ↳ db/seeds.rb:72
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:72
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:79
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:79
+  [1m[36mTrip Create (0.6ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-01-23 09:56:19.173509"], ["time_finish", "2019-01-23 09:56:19.173510"], ["city_start", "hà nội"], ["city_finish", "sapa"], ["coach_id", 4], ["is_repeated", true], ["created_at", "2019-01-23 09:56:19.176243"], ["updated_at", "2019-01-23 09:56:19.176243"]]
+  ↳ db/seeds.rb:79
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:79
+  [1m[35m (3.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:86
+  [1m[36mCoach Load (1.9ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:86
+  [1m[36mTrip Create (3.3ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-01-23 09:56:19.183086"], ["time_finish", "2019-01-23 09:56:19.183087"], ["city_start", "hà nội"], ["city_finish", "hòa bình"], ["coach_id", 5], ["is_repeated", true], ["created_at", "2019-01-23 09:56:19.195799"], ["updated_at", "2019-01-23 09:56:19.195799"]]
+  ↳ db/seeds.rb:86
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:86
+  [1m[35m (4.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:93
+  [1m[36mCustomer Create (3.7ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Shyn"], ["phone_number", "0981599931"], ["email", "kimtacgubin@gmail.com"], ["created_at", "2019-01-23 09:56:19.249637"], ["updated_at", "2019-01-23 09:56:19.249637"]]
+  ↳ db/seeds.rb:93
+  [1m[35m (47.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:93
+  [1m[35m (10.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:97
+  [1m[36mCustomer Create (2.7ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Trần Hoàng Phạm Đức"], ["phone_number", "0984591600"], ["email", "jeannettaschaden@daugherty.com"], ["created_at", "2019-01-23 09:56:19.346262"], ["updated_at", "2019-01-23 09:56:19.346262"]]
+  ↳ db/seeds.rb:97
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:97
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:101
+  [1m[36mCustomer Create (2.6ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Ngô Dung Hiền Tuân"], ["phone_number", "01268 571948"], ["email", "darellpollich@konopelskilangworth.com"], ["created_at", "2019-01-23 09:56:19.361306"], ["updated_at", "2019-01-23 09:56:19.361306"]]
+  ↳ db/seeds.rb:101
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:101
+  [1m[35m (2.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:105
+  [1m[36mCustomer Create (2.6ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Đoàn Phùng Vinh Trung"], ["phone_number", "0141 108 6074"], ["email", "eleasemclaughlin@gulgowski.com"], ["created_at", "2019-01-23 09:56:19.378172"], ["updated_at", "2019-01-23 09:56:19.378172"]]
+  ↳ db/seeds.rb:105
+  [1m[35m (28.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:105
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:109
+  [1m[36mCustomer Create (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Lâm Cường Thi Hà"], ["phone_number", "0171 138 0304"], ["email", "germaine@wunschterry.io"], ["created_at", "2019-01-23 09:56:19.418350"], ["updated_at", "2019-01-23 09:56:19.418350"]]
+  ↳ db/seeds.rb:109
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:109
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:113
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:113
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:113
+  [1m[36mSeat Load (0.2ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  ↳ db/seeds.rb:113
+  [1m[36mTicket Create (1.1ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 1], ["customer_id", 1], ["code", "0912SHYN"], ["seat_id", 19], ["bus_stop", "West"], ["created_at", "2019-01-23 09:56:19.447027"], ["updated_at", "2019-01-23 09:56:19.447027"]]
+  ↳ db/seeds.rb:113
+  [1m[36mTicket Update (0.6ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "MZBWRPSD"], ["updated_at", "2019-01-23 09:56:19.450119"], ["id", 1]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:113
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:120
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:120
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:120
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ db/seeds.rb:120
+  [1m[36mTicket Create (0.6ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "status", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["trip_id", 4], ["customer_id", 1], ["status", 1], ["code", "0912SHYN1"], ["seat_id", 18], ["bus_stop", "Port"], ["created_at", "2019-01-23 09:56:19.457640"], ["updated_at", "2019-01-23 09:56:19.457640"]]
+  ↳ db/seeds.rb:120
+  [1m[36mTicket Update (0.5ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "PFQSHIRM"], ["updated_at", "2019-01-23 09:56:19.459625"], ["id", 2]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:120
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:127
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:127
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:127
+  [1m[36mSeat Load (0.2ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 19], ["LIMIT", 1]]
+  ↳ db/seeds.rb:127
+  [1m[36mTicket Create (0.6ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 4], ["customer_id", 1], ["code", "0912SHYN2"], ["seat_id", 19], ["bus_stop", "West"], ["created_at", "2019-01-23 09:56:19.466633"], ["updated_at", "2019-01-23 09:56:19.466633"]]
+  ↳ db/seeds.rb:127
+  [1m[36mTicket Update (0.5ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "H22JEWER"], ["updated_at", "2019-01-23 09:56:19.469049"], ["id", 3]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:127
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:134
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:134
+  [1m[36mTrip Load (0.2ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:134
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ db/seeds.rb:134
+  [1m[36mTicket Create (0.4ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 1], ["customer_id", 1], ["code", "0912SHYN3"], ["seat_id", 9], ["bus_stop", "West"], ["created_at", "2019-01-23 09:56:19.477511"], ["updated_at", "2019-01-23 09:56:19.477511"]]
+  ↳ db/seeds.rb:134
+  [1m[36mTicket Update (0.4ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "RZ2CHYBL"], ["updated_at", "2019-01-23 09:56:19.479530"], ["id", 4]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:134
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:140
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:140
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:140
+  [1m[36mSeat Load (0.2ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ db/seeds.rb:140
+  [1m[36mTicket Create (0.4ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 2], ["customer_id", 2], ["code", "0912SHYN4"], ["seat_id", 25], ["bus_stop", "East"], ["created_at", "2019-01-23 09:56:19.487472"], ["updated_at", "2019-01-23 09:56:19.487472"]]
+  ↳ db/seeds.rb:140
+  [1m[36mTicket Update (0.4ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "Y3DGDEEH"], ["updated_at", "2019-01-23 09:56:19.489641"], ["id", 5]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:140
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:147
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:147
+  [1m[36mTrip Load (0.2ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:147
+  [1m[36mSeat Load (0.2ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 20], ["LIMIT", 1]]
+  ↳ db/seeds.rb:147
+  [1m[36mTicket Create (0.4ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 1], ["customer_id", 2], ["code", "0912SHYN5"], ["seat_id", 20], ["bus_stop", "West"], ["created_at", "2019-01-23 09:56:19.497494"], ["updated_at", "2019-01-23 09:56:19.497494"]]
+  ↳ db/seeds.rb:147
+  [1m[36mTicket Update (0.5ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "QQDK824Q"], ["updated_at", "2019-01-23 09:56:19.499617"], ["id", 6]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:147
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:154
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ db/seeds.rb:154
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:155
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:155
+  [1m[36mTrip Create (0.5ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "fare", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2018-12-28 21:02:59"], ["time_finish", "2018-12-28 23:02:59"], ["city_start", "hà nội"], ["city_finish", "nghệ an"], ["coach_id", 2], ["fare", 200000.0], ["created_at", "2019-01-23 09:56:19.506736"], ["updated_at", "2019-01-23 09:56:19.506736"]]
+  ↳ db/seeds.rb:155
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:155
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:156
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:156
+  [1m[36mTrip Create (0.4ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "fare", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-01-23 17:56:19.509416"], ["time_finish", "2019-01-23 20:56:19.509450"], ["city_start", "hà nội"], ["city_finish", "nghệ an"], ["coach_id", 1], ["fare", 200000.0], ["created_at", "2019-01-23 09:56:19.512062"], ["updated_at", "2019-01-23 09:56:19.512062"]]
+  ↳ db/seeds.rb:156
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:156
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:157
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:157
+  [1m[36mTrip Load (0.2ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:157
+  [1m[36mSeat Load (0.2ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 138], ["LIMIT", 1]]
+  ↳ db/seeds.rb:157
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ db/seeds.rb:157
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:158
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:158
+  [1m[36mTrip Create (0.4ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "fare", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-01-09 17:00:00"], ["time_finish", "2019-01-09 22:00:00"], ["city_start", "hà nội"], ["city_finish", "nghệ an"], ["coach_id", 1], ["fare", 200000.0], ["created_at", "2019-01-23 09:56:19.525725"], ["updated_at", "2019-01-23 09:56:19.525725"]]
+  ↳ db/seeds.rb:158
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:158
+Started GET "/" for 127.0.0.1 at 2019-01-23 16:56:37 +0700
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/shyn/.rbenv/versions/2.5.3/lib/ruby/gems/2.5.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#index as HTML
+Completed 500 Internal Server Error in 278ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `resource_class' for #<StaticPagesController:0x00005638be124560>):
+  
+app/controllers/application_controller.rb:14:in `configure_permitted_parameters'
+Started GET "/" for 127.0.0.1 at 2019-01-23 17:00:15 +0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/shyn/.rbenv/versions/2.5.3/lib/ruby/gems/2.5.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.2) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.2) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (107.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "lab_ruby_oe15_ticket_fair_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (112.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "lab_ruby_oe15_ticket_fair_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (229.5ms)[0m  [1m[35mCREATE DATABASE "lab_ruby_oe15_ticket_fair_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (272.8ms)[0m  [1m[35mCREATE DATABASE "lab_ruby_oe15_ticket_fair_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1526437648807847685)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateGarages (20181214085749)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "garages" ("id" bigserial primary key, "name" character varying, "phone_number" character varying, "address" character varying, "info" text, "image" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181214085749_create_garages.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181214085749"]]
+  ↳ bin/rails:9
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCoaches (20181215090115)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (9.3ms)[0m  [1m[35mCREATE TABLE "coaches" ("id" bigserial primary key, "license_plate" character varying, "types" character varying, "seat_amount" integer, "seat_form" integer, "garage_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e93fa3fb7d"
+FOREIGN KEY ("garage_id")
+  REFERENCES "garages" ("id")
+)[0m
+  ↳ db/migrate/20181215090115_create_coaches.rb:3
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE  INDEX  "index_coaches_on_garage_id" ON "coaches"  ("garage_id")[0m
+  ↳ db/migrate/20181215090115_create_coaches.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181215090115"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTrips (20181216090918)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE "trips" ("id" bigserial primary key, "time_start" timestamp, "time_finish" timestamp, "city_start" character varying, "city_finish" character varying, "coach_id" bigint, "is_repeated" boolean, "fare" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_2e256bef7a"
+FOREIGN KEY ("coach_id")
+  REFERENCES "coaches" ("id")
+)[0m
+  ↳ db/migrate/20181216090918_create_trips.rb:3
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE  INDEX  "index_trips_on_coach_id" ON "trips"  ("coach_id")[0m
+  ↳ db/migrate/20181216090918_create_trips.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181216090918"]]
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCustomers (20181217083712)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "name" character varying, "phone_number" character varying, "email" character varying, "bus_stop" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181217083712_create_customers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217083712"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateSeats (20181217092030)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "seats" ("id" bigserial primary key, "code" character varying, "types" integer, "coach_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181217092030_create_seats.rb:3
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE  INDEX  "index_seats_on_coach_id" ON "seats"  ("coach_id")[0m
+  ↳ db/migrate/20181217092030_create_seats.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217092030"]]
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTickets (20181217092035)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "tickets" ("id" bigserial primary key, "trip_id" bigint, "customer_id" bigint, "status" integer DEFAULT 2, "code" character varying, "seat_id" bigint, "bus_stop" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_9c1d68f869"
+FOREIGN KEY ("trip_id")
+  REFERENCES "trips" ("id")
+, CONSTRAINT "fk_rails_5685ed71b0"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+, CONSTRAINT "fk_rails_b0904b94e1"
+FOREIGN KEY ("seat_id")
+  REFERENCES "seats" ("id")
+)[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_trip_id" ON "tickets"  ("trip_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_customer_id" ON "tickets"  ("customer_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_seat_id" ON "tickets"  ("seat_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217092035"]]
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCities (20181218013030)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "name" character varying, "types" character varying)[0m
+  ↳ db/migrate/20181218013030_create_cities.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218013030"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateBusStations (20181218090750)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "bus_stations" ("id" bigserial primary key, "name" character varying, "city_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0879d1dc55"
+FOREIGN KEY ("city_id")
+  REFERENCES "cities" ("id")
+)[0m
+  ↳ db/migrate/20181218090750_create_bus_stations.rb:3
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_bus_stations_on_city_id" ON "bus_stations"  ("city_id")[0m
+  ↳ db/migrate/20181218090750_create_bus_stations.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218090750"]]
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateStopPoints (20181218091714)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "stop_points" ("id" bigserial primary key, "time_stop" time, "types" integer, "trip_id" bigint, "bus_station_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_1035516bf3"
+FOREIGN KEY ("trip_id")
+  REFERENCES "trips" ("id")
+, CONSTRAINT "fk_rails_189d68eded"
+FOREIGN KEY ("bus_station_id")
+  REFERENCES "bus_stations" ("id")
+)[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_stop_points_on_trip_id" ON "stop_points"  ("trip_id")[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_stop_points_on_bus_station_id" ON "stop_points"  ("bus_station_id")[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218091714"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDistricts (20181218092921)
+  [1m[35m (1.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "districts" ("id" bigserial primary key, "name" character varying, "types" character varying, "city_id" bigint)[0m
+  ↳ db/migrate/20181218092921_create_districts.rb:3
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE  INDEX  "index_districts_on_city_id" ON "districts"  ("city_id")[0m
+  ↳ db/migrate/20181218092921_create_districts.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218092921"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20181218093550)
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "phone_number" character varying, "admin" boolean, "garage_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_f26f3b17ed"
+FOREIGN KEY ("garage_id")
+  REFERENCES "garages" ("id")
+)[0m
+  ↳ db/migrate/20181218093550_create_users.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_garage_id" ON "users"  ("garage_id")[0m
+  ↳ db/migrate/20181218093550_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218093550"]]
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddPasswordDigest (20181219085845)
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "password_digest" character varying[0m
+  ↳ db/migrate/20181219085845_add_password_digest.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181219085845"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-01-23 10:00:38.423651"], ["updated_at", "2019-01-23 10:00:38.423651"]]
+  ↳ bin/rails:9
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1526437648807847685)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for 127.0.0.1 at 2019-01-23 17:00:44 +0700
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/shyn/.rbenv/versions/2.5.3/lib/ruby/gems/2.5.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#index as HTML
+  Rendering static_pages/index.html.erb within layouts/application
+  Rendered static_pages/index.html.erb within layouts/application (23019.2ms)
+  Rendered layouts/_header.html.erb (17.3ms)
+  Rendered layouts/_footer.html.erb (8.5ms)
+Completed 200 OK in 23945ms (Views: 23934.2ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  ↳ bin/rails:9
+  [1m[35m (108.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "lab_ruby_oe15_ticket_fair_development"[0m
+  ↳ bin/rails:9
+  [1m[35m (110.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "lab_ruby_oe15_ticket_fair_test"[0m
+  ↳ bin/rails:9
+  [1m[35m (444.5ms)[0m  [1m[35mCREATE DATABASE "lab_ruby_oe15_ticket_fair_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (236.0ms)[0m  [1m[35mCREATE DATABASE "lab_ruby_oe15_ticket_fair_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (7.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1526437648807847685)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateGarages (20181214085749)
+  [1m[35m (3.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "garages" ("id" bigserial primary key, "name" character varying, "phone_number" character varying, "address" character varying, "info" text, "image" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181214085749_create_garages.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181214085749"]]
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCoaches (20181215090115)
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "coaches" ("id" bigserial primary key, "license_plate" character varying, "types" character varying, "seat_amount" integer, "seat_form" integer, "garage_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_e93fa3fb7d"
+FOREIGN KEY ("garage_id")
+  REFERENCES "garages" ("id")
+)[0m
+  ↳ db/migrate/20181215090115_create_coaches.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_coaches_on_garage_id" ON "coaches"  ("garage_id")[0m
+  ↳ db/migrate/20181215090115_create_coaches.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181215090115"]]
+  ↳ bin/rails:9
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTrips (20181216090918)
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "trips" ("id" bigserial primary key, "time_start" timestamp, "time_finish" timestamp, "city_start" character varying, "city_finish" character varying, "coach_id" bigint, "is_repeated" boolean, "fare" float, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_2e256bef7a"
+FOREIGN KEY ("coach_id")
+  REFERENCES "coaches" ("id")
+)[0m
+  ↳ db/migrate/20181216090918_create_trips.rb:3
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_trips_on_coach_id" ON "trips"  ("coach_id")[0m
+  ↳ db/migrate/20181216090918_create_trips.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181216090918"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCustomers (20181217083712)
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "name" character varying, "phone_number" character varying, "email" character varying, "bus_stop" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181217083712_create_customers.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217083712"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateSeats (20181217092030)
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "seats" ("id" bigserial primary key, "code" character varying, "types" integer, "coach_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20181217092030_create_seats.rb:3
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_seats_on_coach_id" ON "seats"  ("coach_id")[0m
+  ↳ db/migrate/20181217092030_create_seats.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217092030"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTickets (20181217092035)
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "tickets" ("id" bigserial primary key, "trip_id" bigint, "customer_id" bigint, "status" integer DEFAULT 2, "code" character varying, "seat_id" bigint, "bus_stop" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_9c1d68f869"
+FOREIGN KEY ("trip_id")
+  REFERENCES "trips" ("id")
+, CONSTRAINT "fk_rails_5685ed71b0"
+FOREIGN KEY ("customer_id")
+  REFERENCES "customers" ("id")
+, CONSTRAINT "fk_rails_b0904b94e1"
+FOREIGN KEY ("seat_id")
+  REFERENCES "seats" ("id")
+)[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_trip_id" ON "tickets"  ("trip_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_customer_id" ON "tickets"  ("customer_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_tickets_on_seat_id" ON "tickets"  ("seat_id")[0m
+  ↳ db/migrate/20181217092035_create_tickets.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181217092035"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateCities (20181218013030)
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "cities" ("id" bigserial primary key, "name" character varying, "types" character varying)[0m
+  ↳ db/migrate/20181218013030_create_cities.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218013030"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateBusStations (20181218090750)
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "bus_stations" ("id" bigserial primary key, "name" character varying, "city_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_0879d1dc55"
+FOREIGN KEY ("city_id")
+  REFERENCES "cities" ("id")
+)[0m
+  ↳ db/migrate/20181218090750_create_bus_stations.rb:3
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_bus_stations_on_city_id" ON "bus_stations"  ("city_id")[0m
+  ↳ db/migrate/20181218090750_create_bus_stations.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218090750"]]
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateStopPoints (20181218091714)
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "stop_points" ("id" bigserial primary key, "time_stop" time, "types" integer, "trip_id" bigint, "bus_station_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_1035516bf3"
+FOREIGN KEY ("trip_id")
+  REFERENCES "trips" ("id")
+, CONSTRAINT "fk_rails_189d68eded"
+FOREIGN KEY ("bus_station_id")
+  REFERENCES "bus_stations" ("id")
+)[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_stop_points_on_trip_id" ON "stop_points"  ("trip_id")[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_stop_points_on_bus_station_id" ON "stop_points"  ("bus_station_id")[0m
+  ↳ db/migrate/20181218091714_create_stop_points.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218091714"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateDistricts (20181218092921)
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "districts" ("id" bigserial primary key, "name" character varying, "types" character varying, "city_id" bigint)[0m
+  ↳ db/migrate/20181218092921_create_districts.rb:3
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_districts_on_city_id" ON "districts"  ("city_id")[0m
+  ↳ db/migrate/20181218092921_create_districts.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218092921"]]
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20181218093550)
+  [1m[35m (1.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying, "phone_number" character varying, "admin" boolean, "garage_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_f26f3b17ed"
+FOREIGN KEY ("garage_id")
+  REFERENCES "garages" ("id")
+)[0m
+  ↳ db/migrate/20181218093550_create_users.rb:3
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_garage_id" ON "users"  ("garage_id")[0m
+  ↳ db/migrate/20181218093550_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181218093550"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to AddPasswordDigest (20181219085845)
+  [1m[35m (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "password_digest" character varying[0m
+  ↳ db/migrate/20181219085845_add_password_digest.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181219085845"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-02-10 03:19:44.608992"], ["updated_at", "2019-02-10 03:19:44.608992"]]
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(1526437648807847685)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.7ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Lâm"], ["phone_number", "1455561659"], ["address", "Long An"], ["info", "Ba tô không con việc."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.900347"], ["updated_at", "2019-02-10 03:19:51.900347"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Hoàng"], ["phone_number", "2279517330"], ["address", "Quảng Trị"], ["info", "Á thế nghỉ vàng thuê."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.905247"], ["updated_at", "2019-02-10 03:19:51.905247"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.5ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Hồ"], ["phone_number", "7839054769"], ["address", "TP Cần Thơ"], ["info", "Biển đồng khoảng mây đã."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.909237"], ["updated_at", "2019-02-10 03:19:51.909237"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Phạm"], ["phone_number", "5930565522"], ["address", "Kiên Giang"], ["info", "Thôi lỗi mười bảy nha."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.913126"], ["updated_at", "2019-02-10 03:19:51.913126"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Vũ"], ["phone_number", "9084381380"], ["address", "TP Đà Nẵng"], ["info", "Tôi ờ mướn yêu ghế."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.917084"], ["updated_at", "2019-02-10 03:19:51.917084"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Hà"], ["phone_number", "9446683793"], ["address", "Lào Cai"], ["info", "Xuồng làm áo tui đồng."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.920536"], ["updated_at", "2019-02-10 03:19:51.920536"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.5ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Bùi"], ["phone_number", "2078778264"], ["address", "Đồng Nai"], ["info", "Nha đỏ may kim tô."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.924516"], ["updated_at", "2019-02-10 03:19:51.924516"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Nguyễn"], ["phone_number", "6010917406"], ["address", "Đồng Nai"], ["info", "Lầu chết sáu tôi tô."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.929624"], ["updated_at", "2019-02-10 03:19:51.929624"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Dương"], ["phone_number", "8043707070"], ["address", "Đắk Lắk"], ["info", "Đồng trăng quần nón bạn."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.933494"], ["updated_at", "2019-02-10 03:19:51.933494"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:7
+  [1m[36mGarage Create (0.4ms)[0m  [1m[32mINSERT INTO "garages" ("name", "phone_number", "address", "info", "image", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Phạm"], ["phone_number", "5287023592"], ["address", "Thái Bình"], ["info", "Biển quê gì dép biết."], ["image", "http://wikidulich.org/wp-content/uploads/2018/07/Logo-fanxipan-bus.jpg"], ["created_at", "2019-02-10 03:19:51.937110"], ["updated_at", "2019-02-10 03:19:51.937110"]]
+  ↳ db/seeds.rb:7
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:7
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.9ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S7532844C"], ["types", "Xe giường nằm"], ["seat_amount", 26], ["seat_form", 1], ["garage_id", 8], ["created_at", "2019-02-10 03:19:51.984951"], ["updated_at", "2019-02-10 03:19:51.984951"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.5ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S8348145E"], ["types", "Xe giường nằm"], ["seat_amount", 27], ["seat_form", 1], ["garage_id", 6], ["created_at", "2019-02-10 03:19:51.990850"], ["updated_at", "2019-02-10 03:19:51.990850"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.6ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "T0015517E"], ["types", "Xe giường nằm"], ["seat_amount", 42], ["seat_form", 1], ["garage_id", 6], ["created_at", "2019-02-10 03:19:51.996154"], ["updated_at", "2019-02-10 03:19:51.996154"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.6ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S6187807F"], ["types", "Xe giường nằm"], ["seat_amount", 44], ["seat_form", 1], ["garage_id", 10], ["created_at", "2019-02-10 03:19:52.001970"], ["updated_at", "2019-02-10 03:19:52.001970"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.6ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S9380081H"], ["types", "Xe giường nằm"], ["seat_amount", 24], ["seat_form", 1], ["garage_id", 9], ["created_at", "2019-02-10 03:19:52.007763"], ["updated_at", "2019-02-10 03:19:52.007763"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.6ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S9038362J"], ["types", "Xe giường nằm"], ["seat_amount", 34], ["seat_form", 2], ["garage_id", 5], ["created_at", "2019-02-10 03:19:52.013685"], ["updated_at", "2019-02-10 03:19:52.013685"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.5ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S6734081G"], ["types", "Xe giường nằm"], ["seat_amount", 37], ["seat_form", 2], ["garage_id", 1], ["created_at", "2019-02-10 03:19:52.019771"], ["updated_at", "2019-02-10 03:19:52.019771"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.6ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S7714806Z"], ["types", "Xe giường nằm"], ["seat_amount", 42], ["seat_form", 2], ["garage_id", 5], ["created_at", "2019-02-10 03:19:52.025647"], ["updated_at", "2019-02-10 03:19:52.025647"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.5ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S7140705E"], ["types", "Xe giường nằm"], ["seat_amount", 44], ["seat_form", 1], ["garage_id", 4], ["created_at", "2019-02-10 03:19:52.031506"], ["updated_at", "2019-02-10 03:19:52.031506"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ db/seeds.rb:19
+  [1m[36mCoach Create (0.7ms)[0m  [1m[32mINSERT INTO "coaches" ("license_plate", "types", "seat_amount", "seat_form", "garage_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["license_plate", "S7488408C"], ["types", "Xe giường nằm"], ["seat_amount", 45], ["seat_form", 1], ["garage_id", 10], ["created_at", "2019-02-10 03:19:52.036898"], ["updated_at", "2019-02-10 03:19:52.036898"]]
+  ↳ db/seeds.rb:19
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.6ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.9ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C1"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.058440"], ["updated_at", "2019-02-10 03:19:52.058440"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C2"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.064189"], ["updated_at", "2019-02-10 03:19:52.064189"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C3"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.072918"], ["updated_at", "2019-02-10 03:19:52.072918"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C4"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.077958"], ["updated_at", "2019-02-10 03:19:52.077958"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C5"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.082733"], ["updated_at", "2019-02-10 03:19:52.082733"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C6"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.087379"], ["updated_at", "2019-02-10 03:19:52.087379"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C7"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.092810"], ["updated_at", "2019-02-10 03:19:52.092810"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C8"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.097915"], ["updated_at", "2019-02-10 03:19:52.097915"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C9"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.103329"], ["updated_at", "2019-02-10 03:19:52.103329"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C10"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.108091"], ["updated_at", "2019-02-10 03:19:52.108091"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C11"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.113253"], ["updated_at", "2019-02-10 03:19:52.113253"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C12"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.118188"], ["updated_at", "2019-02-10 03:19:52.118188"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C13"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.123239"], ["updated_at", "2019-02-10 03:19:52.123239"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C14"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.128929"], ["updated_at", "2019-02-10 03:19:52.128929"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C15"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.134559"], ["updated_at", "2019-02-10 03:19:52.134559"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C16"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.139564"], ["updated_at", "2019-02-10 03:19:52.139564"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C17"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.144344"], ["updated_at", "2019-02-10 03:19:52.144344"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:28
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:28
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C18"], ["types", 1], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.148977"], ["updated_at", "2019-02-10 03:19:52.148977"]]
+  ↳ db/seeds.rb:28
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:28
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.6ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C19"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.155057"], ["updated_at", "2019-02-10 03:19:52.155057"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.7ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C20"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.160106"], ["updated_at", "2019-02-10 03:19:52.160106"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C21"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.165487"], ["updated_at", "2019-02-10 03:19:52.165487"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.5ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C22"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.171574"], ["updated_at", "2019-02-10 03:19:52.171574"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C23"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.176738"], ["updated_at", "2019-02-10 03:19:52.176738"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C24"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.181213"], ["updated_at", "2019-02-10 03:19:52.181213"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C25"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.185509"], ["updated_at", "2019-02-10 03:19:52.185509"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C26"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.190307"], ["updated_at", "2019-02-10 03:19:52.190307"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.8ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C27"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.195271"], ["updated_at", "2019-02-10 03:19:52.195271"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C28"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.200884"], ["updated_at", "2019-02-10 03:19:52.200884"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C29"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.206009"], ["updated_at", "2019-02-10 03:19:52.206009"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C30"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.211232"], ["updated_at", "2019-02-10 03:19:52.211232"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C31"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.216304"], ["updated_at", "2019-02-10 03:19:52.216304"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C32"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.221397"], ["updated_at", "2019-02-10 03:19:52.221397"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C33"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.226375"], ["updated_at", "2019-02-10 03:19:52.226375"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.7ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C34"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.231708"], ["updated_at", "2019-02-10 03:19:52.231708"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C35"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.237658"], ["updated_at", "2019-02-10 03:19:52.237658"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:36
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:36
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C36"], ["types", 2], ["coach_id", 1], ["created_at", "2019-02-10 03:19:52.243308"], ["updated_at", "2019-02-10 03:19:52.243308"]]
+  ↳ db/seeds.rb:36
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:36
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (3.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C1"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.248387"], ["updated_at", "2019-02-10 03:19:52.248387"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C2"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.256736"], ["updated_at", "2019-02-10 03:19:52.256736"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C3"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.262316"], ["updated_at", "2019-02-10 03:19:52.262316"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C4"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.267572"], ["updated_at", "2019-02-10 03:19:52.267572"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C5"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.272398"], ["updated_at", "2019-02-10 03:19:52.272398"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C6"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.277102"], ["updated_at", "2019-02-10 03:19:52.277102"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.6ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C7"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.281895"], ["updated_at", "2019-02-10 03:19:52.281895"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C8"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.287141"], ["updated_at", "2019-02-10 03:19:52.287141"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C9"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.292105"], ["updated_at", "2019-02-10 03:19:52.292105"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:44
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:44
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C10"], ["types", 1], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.296774"], ["updated_at", "2019-02-10 03:19:52.296774"]]
+  ↳ db/seeds.rb:44
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:44
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C11"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.301620"], ["updated_at", "2019-02-10 03:19:52.301620"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C12"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.306797"], ["updated_at", "2019-02-10 03:19:52.306797"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C13"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.311781"], ["updated_at", "2019-02-10 03:19:52.311781"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C14"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.317167"], ["updated_at", "2019-02-10 03:19:52.317167"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C15"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.323002"], ["updated_at", "2019-02-10 03:19:52.323002"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C16"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.328935"], ["updated_at", "2019-02-10 03:19:52.328935"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C17"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.334098"], ["updated_at", "2019-02-10 03:19:52.334098"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C18"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.339344"], ["updated_at", "2019-02-10 03:19:52.339344"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.5ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C19"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.344266"], ["updated_at", "2019-02-10 03:19:52.344266"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:52
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:52
+  [1m[36mSeat Create (0.4ms)[0m  [1m[32mINSERT INTO "seats" ("code", "types", "coach_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["code", "C20"], ["types", 2], ["coach_id", 2], ["created_at", "2019-02-10 03:19:52.349266"], ["updated_at", "2019-02-10 03:19:52.349266"]]
+  ↳ db/seeds.rb:52
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:52
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:58
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:58
+  [1m[36mTrip Create (0.8ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-02-10 03:19:52.356669"], ["time_finish", "2019-02-10 03:19:52.356670"], ["city_start", "hà nội"], ["city_finish", "hà giang"], ["coach_id", 1], ["is_repeated", true], ["created_at", "2019-02-10 03:19:52.375782"], ["updated_at", "2019-02-10 03:19:52.375782"]]
+  ↳ db/seeds.rb:58
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:58
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:65
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:65
+  [1m[36mTrip Create (0.6ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-02-10 03:19:52.379176"], ["time_finish", "2019-02-10 03:19:52.379177"], ["city_start", "hà nội"], ["city_finish", "nghệ an"], ["coach_id", 2], ["is_repeated", true], ["created_at", "2019-02-10 03:19:52.381307"], ["updated_at", "2019-02-10 03:19:52.381307"]]
+  ↳ db/seeds.rb:65
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:65
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:72
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:72
+  [1m[36mTrip Create (0.5ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-02-10 03:19:52.384257"], ["time_finish", "2019-02-10 03:19:52.384258"], ["city_start", "hà nội"], ["city_finish", "thanh hóa"], ["coach_id", 3], ["is_repeated", true], ["created_at", "2019-02-10 03:19:52.386318"], ["updated_at", "2019-02-10 03:19:52.386318"]]
+  ↳ db/seeds.rb:72
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:72
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:79
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:79
+  [1m[36mTrip Create (0.5ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-02-10 03:19:52.389270"], ["time_finish", "2019-02-10 03:19:52.389271"], ["city_start", "hà nội"], ["city_finish", "sapa"], ["coach_id", 4], ["is_repeated", true], ["created_at", "2019-02-10 03:19:52.391309"], ["updated_at", "2019-02-10 03:19:52.391309"]]
+  ↳ db/seeds.rb:79
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:79
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:86
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:86
+  [1m[36mTrip Create (0.5ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "is_repeated", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-02-10 03:19:52.394307"], ["time_finish", "2019-02-10 03:19:52.394308"], ["city_start", "hà nội"], ["city_finish", "hòa bình"], ["coach_id", 5], ["is_repeated", true], ["created_at", "2019-02-10 03:19:52.396186"], ["updated_at", "2019-02-10 03:19:52.396186"]]
+  ↳ db/seeds.rb:86
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:86
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:93
+  [1m[36mCustomer Create (0.6ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Shyn"], ["phone_number", "0981599931"], ["email", "kimtacgubin@gmail.com"], ["created_at", "2019-02-10 03:19:52.412526"], ["updated_at", "2019-02-10 03:19:52.412526"]]
+  ↳ db/seeds.rb:93
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:93
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:97
+  [1m[36mCustomer Create (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Tô Tâm"], ["phone_number", "0984591600"], ["email", "willardkoelpin@murazikgrimes.com"], ["created_at", "2019-02-10 03:19:52.416960"], ["updated_at", "2019-02-10 03:19:52.416960"]]
+  ↳ db/seeds.rb:97
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:97
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:101
+  [1m[36mCustomer Create (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Trần Thủy Kha"], ["phone_number", "013681 06434"], ["email", "aurelio@gleasonbechtelar.org"], ["created_at", "2019-02-10 03:19:52.420855"], ["updated_at", "2019-02-10 03:19:52.420855"]]
+  ↳ db/seeds.rb:101
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:101
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:105
+  [1m[36mCustomer Create (0.3ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Bùi Tâm Cường Đào"], ["phone_number", "016977 8917"], ["email", "modesta@dietrich.co"], ["created_at", "2019-02-10 03:19:52.424802"], ["updated_at", "2019-02-10 03:19:52.424802"]]
+  ↳ db/seeds.rb:105
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:105
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:109
+  [1m[36mCustomer Create (0.4ms)[0m  [1m[32mINSERT INTO "customers" ("name", "phone_number", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Vũ Nguyễn"], ["phone_number", "018517 76706"], ["email", "michel@hartmann.co"], ["created_at", "2019-02-10 03:19:52.432018"], ["updated_at", "2019-02-10 03:19:52.432018"]]
+  ↳ db/seeds.rb:109
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:109
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:113
+  [1m[36mCustomer Load (0.4ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:113
+  [1m[36mTrip Load (0.4ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:113
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ db/seeds.rb:113
+  [1m[36mTicket Create (1.3ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 1], ["customer_id", 1], ["code", "0912SHYN"], ["seat_id", 12], ["bus_stop", "East"], ["created_at", "2019-02-10 03:19:52.458747"], ["updated_at", "2019-02-10 03:19:52.458747"]]
+  ↳ db/seeds.rb:113
+  [1m[36mTicket Update (0.7ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "H9RA0NWA"], ["updated_at", "2019-02-10 03:19:52.461586"], ["id", 1]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:113
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:120
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:120
+  [1m[36mTrip Load (0.4ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:120
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ db/seeds.rb:120
+  [1m[36mTicket Create (0.6ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "status", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["trip_id", 5], ["customer_id", 1], ["status", 1], ["code", "0912SHYN1"], ["seat_id", 21], ["bus_stop", "North"], ["created_at", "2019-02-10 03:19:52.468896"], ["updated_at", "2019-02-10 03:19:52.468896"]]
+  ↳ db/seeds.rb:120
+  [1m[36mTicket Update (0.6ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "CD9WKHTJ"], ["updated_at", "2019-02-10 03:19:52.470882"], ["id", 2]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:120
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:127
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:127
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ db/seeds.rb:127
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ db/seeds.rb:127
+  [1m[36mTicket Create (0.6ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 4], ["customer_id", 1], ["code", "0912SHYN2"], ["seat_id", 28], ["bus_stop", "North"], ["created_at", "2019-02-10 03:19:52.478176"], ["updated_at", "2019-02-10 03:19:52.478176"]]
+  ↳ db/seeds.rb:127
+  [1m[36mTicket Update (0.6ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "KA3DVLG8"], ["updated_at", "2019-02-10 03:19:52.480159"], ["id", 3]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:127
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:134
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:134
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:134
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ db/seeds.rb:134
+  [1m[36mTicket Create (0.5ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 5], ["customer_id", 1], ["code", "0912SHYN3"], ["seat_id", 3], ["bus_stop", "West"], ["created_at", "2019-02-10 03:19:52.487094"], ["updated_at", "2019-02-10 03:19:52.487094"]]
+  ↳ db/seeds.rb:134
+  [1m[36mTicket Update (0.5ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "K3UIRJHI"], ["updated_at", "2019-02-10 03:19:52.488879"], ["id", 4]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:134
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:140
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:140
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ db/seeds.rb:140
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:140
+  [1m[36mTicket Create (0.5ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 5], ["customer_id", 2], ["code", "0912SHYN4"], ["seat_id", 1], ["bus_stop", "Lake"], ["created_at", "2019-02-10 03:19:52.495666"], ["updated_at", "2019-02-10 03:19:52.495666"]]
+  ↳ db/seeds.rb:140
+  [1m[36mTicket Update (0.5ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "VT0F3IEB"], ["updated_at", "2019-02-10 03:19:52.497420"], ["id", 5]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:140
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:147
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:147
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:147
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+  ↳ db/seeds.rb:147
+  [1m[36mTicket Create (0.5ms)[0m  [1m[32mINSERT INTO "tickets" ("trip_id", "customer_id", "code", "seat_id", "bus_stop", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["trip_id", 1], ["customer_id", 2], ["code", "0912SHYN5"], ["seat_id", 18], ["bus_stop", "East"], ["created_at", "2019-02-10 03:19:52.504377"], ["updated_at", "2019-02-10 03:19:52.504377"]]
+  ↳ db/seeds.rb:147
+  [1m[36mTicket Update (0.5ms)[0m  [1m[33mUPDATE "tickets" SET "code" = $1, "updated_at" = $2 WHERE "tickets"."id" = $3[0m  [["code", "DY5AIWYG"], ["updated_at", "2019-02-10 03:19:52.506100"], ["id", 6]]
+  ↳ app/models/ticket.rb:25
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:147
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:154
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ db/seeds.rb:154
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:155
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ db/seeds.rb:155
+  [1m[36mTrip Create (0.5ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "fare", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2018-12-28 21:02:59"], ["time_finish", "2018-12-28 23:02:59"], ["city_start", "hà nội"], ["city_finish", "nghệ an"], ["coach_id", 2], ["fare", 200000.0], ["created_at", "2019-02-10 03:19:52.512769"], ["updated_at", "2019-02-10 03:19:52.512769"]]
+  ↳ db/seeds.rb:155
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:155
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:156
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:156
+  [1m[36mTrip Create (0.4ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "fare", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-02-25 03:19:52.515642"], ["time_finish", "2019-02-25 03:19:52.515744"], ["city_start", "hà nội"], ["city_finish", "nghệ an"], ["coach_id", 1], ["fare", 200000.0], ["created_at", "2019-02-10 03:19:52.517654"], ["updated_at", "2019-02-10 03:19:52.517654"]]
+  ↳ db/seeds.rb:156
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:156
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:157
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:157
+  [1m[36mTrip Load (0.2ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:157
+  [1m[36mSeat Load (0.2ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 138], ["LIMIT", 1]]
+  ↳ db/seeds.rb:157
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ db/seeds.rb:157
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:158
+  [1m[36mCoach Load (0.2ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ db/seeds.rb:158
+  [1m[36mTrip Create (0.4ms)[0m  [1m[32mINSERT INTO "trips" ("time_start", "time_finish", "city_start", "city_finish", "coach_id", "fare", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["time_start", "2019-01-09 17:00:00"], ["time_finish", "2019-01-09 22:00:00"], ["city_start", "hà nội"], ["city_finish", "nghệ an"], ["coach_id", 1], ["fare", 200000.0], ["created_at", "2019-02-10 03:19:52.527107"], ["updated_at", "2019-02-10 03:19:52.527107"]]
+  ↳ db/seeds.rb:158
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:158
+Started GET "/" for ::1 at 2019-02-10 10:20:20 +0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/shyn/.rbenv/versions/2.5.3/lib/ruby/gems/2.5.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#index as HTML
+  Rendering static_pages/index.html.erb within layouts/application
+  Rendered static_pages/index.html.erb within layouts/application (642.0ms)
+  Rendered layouts/_header.html.erb (23.7ms)
+  Rendered layouts/_footer.html.erb (7.0ms)
+Completed 200 OK in 909ms (Views: 898.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/vi/tickets?search=cancel" for ::1 at 2019-02-10 10:20:29 +0700
+Processing by TicketsController#index as HTML
+  Parameters: {"search"=>"cancel", "locale"=>"vi"}
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered tickets/_form_search_ticket.html.erb (1.6ms)
+  Rendered tickets/index.html.erb within layouts/application (3.6ms)
+  Rendered layouts/_header.html.erb (5.8ms)
+  Rendered layouts/_footer.html.erb (6.2ms)
+Completed 200 OK in 122ms (Views: 119.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/vi/tickets?search=search" for ::1 at 2019-02-10 10:20:30 +0700
+Processing by TicketsController#index as HTML
+  Parameters: {"search"=>"search", "locale"=>"vi"}
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered tickets/_form_search_all_ticket.html.erb (1.2ms)
+  Rendered tickets/index.html.erb within layouts/application (2.9ms)
+  Rendered layouts/_header.html.erb (8.3ms)
+  Rendered layouts/_footer.html.erb (6.4ms)
+Completed 200 OK in 133ms (Views: 131.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/vi/tickets?utf8=%E2%9C%93&search=search&phone_number=0981599938&commit=Ki%E1%BB%83m+tra+v%C3%A9" for ::1 at 2019-02-10 10:20:32 +0700
+Processing by TicketsController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"search", "phone_number"=>"0981599938", "commit"=>"Kiểm tra vé", "locale"=>"vi"}
+  [1m[36mTicket Load (1.3ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" INNER JOIN "customers" ON "customers"."id" = "tickets"."customer_id" WHERE (customers.phone_number = '0981599938') ORDER BY "tickets"."created_at" DESC[0m
+  ↳ app/controllers/tickets_controller.rb:56
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered tickets/_form_search_all_ticket.html.erb (2.1ms)
+  Rendered tickets/index.html.erb within layouts/application (3.7ms)
+  Rendered layouts/_header.html.erb (8.2ms)
+  Rendered layouts/_footer.html.erb (5.0ms)
+Completed 200 OK in 170ms (Views: 131.6ms | ActiveRecord: 10.1ms)
+
+
+Started GET "/vi/tickets?utf8=%E2%9C%93&search=search&phone_number=0981599931&commit=Ki%E1%BB%83m+tra+v%C3%A9" for ::1 at 2019-02-10 10:20:37 +0700
+Processing by TicketsController#index as HTML
+  Parameters: {"utf8"=>"✓", "search"=>"search", "phone_number"=>"0981599931", "commit"=>"Kiểm tra vé", "locale"=>"vi"}
+  [1m[36mTicket Load (0.6ms)[0m  [1m[34mSELECT "tickets".* FROM "tickets" INNER JOIN "customers" ON "customers"."id" = "tickets"."customer_id" WHERE (customers.phone_number = '0981599931') ORDER BY "tickets"."created_at" DESC[0m
+  ↳ app/controllers/tickets_controller.rb:56
+  Rendering tickets/index.html.erb within layouts/application
+  Rendered tickets/_form_search_all_ticket.html.erb (1.3ms)
+  [1m[36mTrip Load (0.4ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:13
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:17
+  [1m[36mTrip Load (0.4ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCoach Load (0.4ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mGarage Load (0.4ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCACHE Customer Load (0.0ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:13
+  [1m[36mSeat Load (0.5ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:17
+  [1m[36mCACHE Trip Load (0.0ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCACHE Coach Load (0.0ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCACHE Garage Load (0.0ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCACHE Customer Load (0.0ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:13
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:17
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCoach Load (0.3ms)[0m  [1m[34mSELECT  "coaches".* FROM "coaches" WHERE "coaches"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mGarage Load (0.3ms)[0m  [1m[34mSELECT  "garages".* FROM "garages" WHERE "garages"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:6
+  [1m[36mCACHE Customer Load (0.0ms)[0m  [1m[34mSELECT  "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:13
+  [1m[36mSeat Load (0.3ms)[0m  [1m[34mSELECT  "seats".* FROM "seats" WHERE "seats"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/views/tickets/_ticket.html.erb:17
+  Rendered collection of tickets/_ticket.html.erb [4 times] (135.0ms)
+  Rendered tickets/index.html.erb within layouts/application (139.0ms)
+  Rendered layouts/_header.html.erb (7.3ms)
+  Rendered layouts/_footer.html.erb (4.5ms)
+Completed 200 OK in 289ms (Views: 249.7ms | ActiveRecord: 24.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-02-18 13:30:19 +0700
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/shyn/.rbenv/versions/2.5.3/lib/ruby/gems/2.5.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by StaticPagesController#index as HTML
+  Rendering static_pages/index.html.erb within layouts/application
+  Rendered static_pages/index.html.erb within layouts/application (589.8ms)
+  Rendered layouts/_header.html.erb (18.3ms)
+  Rendered layouts/_footer.html.erb (4.6ms)
+Completed 200 OK in 845ms (Views: 833.6ms | ActiveRecord: 0.0ms)
+
+
+  [1m[36mTicket Load (4.6ms)[0m  [1m[34mSELECT  "tickets".* FROM "tickets" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTicket Load (0.4ms)[0m  [1m[34mSELECT  "tickets".* FROM "tickets" ORDER BY "tickets"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTicket Load (0.8ms)[0m  [1m[34mSELECT  "tickets".* FROM "tickets" ORDER BY "tickets"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTicket Load (0.6ms)[0m  [1m[34mSELECT  "tickets".* FROM "tickets" ORDER BY "tickets"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]

@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: lab_ruby_oe15_ticket_fair_development
+
+test:
+  <<: *default
+  database: lab_ruby_oe15_ticket_fair_test
+
+production:
+  <<: *default
+  database: lab_ruby_oe15_ticket_fair_production
+  username: lab_ruby_oe15_ticket_fair
+  password: <%= ENV['LAB_RUBY_OE15_TICKET_FAIR_DATABASE_PASSWORD'] %>
